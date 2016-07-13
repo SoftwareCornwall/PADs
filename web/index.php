@@ -1,1 +1,2 @@
-<?php phpinfo(); ?>Hello
+<?php
+require 'vendor/autoload.php;
