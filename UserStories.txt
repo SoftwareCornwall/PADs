@@ -1,0 +1,40 @@
+=====================================================================
+As a caller, I want to unlock cabinet so that I can use the defib 
+
+Scenario: Valid code unlocks door
+Given a locked cabinet
+When the correct code is entered 
+Then the door unlocks 
+
+Scenario: Invalid code given 
+Given a locked cabinet
+When the incorrect code entered 
+Then the cabinet does not unlock 
+
+=====================================================================
+As FLEET, I want to be notified by text so that I can return the defibrillator as soon as possible. 
+
+Restrictions 
+* A fixed number 
+
+Scenario: FLEET are notified by SMS
+Given a locked cabinet 
+When the correct code is entered 
+Then the first of three text messages is sent to a list of FLEET personnel
+
+Scenario: FLEET can view the status via the website
+Given a locked cabinet 
+When the correct code is entered 
+Then FLEET can see “cabinet unlocked” on website 
+
+=====================================================================
+As a guardian, I want to be notified by text so that I can assist at the scene of the incident. 
+
+Restrictions 
+* A fixed number 
+
+Scenario: Guardians are notified by SMS
+Given a locked cabinet 
+When the correct code is entered 
+Then the first of three text messages is sent to a list of Guardians
+
