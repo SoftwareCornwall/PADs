@@ -4,7 +4,8 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit8414827a9347a3836f1a7f49fea38198
+
+class ComposerStaticInit090bda90eabaefdc9e73671567dc8253
 {
     public static $files = array (
         '253c157292f75eb38082b5acb06f3f01' => __DIR__ . '/..' . '/nikic/fast-route/src/functions.php',
@@ -13,6 +14,8 @@ class ComposerStaticInit8414827a9347a3836f1a7f49fea38198
     public static $prefixLengthsPsr4 = array (
         'S' => 
         array (
+
+            'Slim\\Views\\' => 11,
             'Slim\\' => 5,
         ),
         'P' => 
@@ -30,6 +33,11 @@ class ComposerStaticInit8414827a9347a3836f1a7f49fea38198
     );
 
     public static $prefixDirsPsr4 = array (
+
+        'Slim\\Views\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/slim/twig-view/src',
+        ),
         'Slim\\' => 
         array (
             0 => __DIR__ . '/..' . '/slim/slim/Slim',
@@ -49,6 +57,13 @@ class ComposerStaticInit8414827a9347a3836f1a7f49fea38198
     );
 
     public static $prefixesPsr0 = array (
+        'T' => 
+        array (
+            'Twig_' => 
+            array (
+                0 => __DIR__ . '/..' . '/twig/twig/lib',
+            ),
+        ),
         'P' => 
         array (
             'Pimple' => 
@@ -61,9 +76,10 @@ class ComposerStaticInit8414827a9347a3836f1a7f49fea38198
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit8414827a9347a3836f1a7f49fea38198::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit8414827a9347a3836f1a7f49fea38198::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit8414827a9347a3836f1a7f49fea38198::$prefixesPsr0;
+
+            $loader->prefixLengthsPsr4 = ComposerStaticInit090bda90eabaefdc9e73671567dc8253::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit090bda90eabaefdc9e73671567dc8253::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit090bda90eabaefdc9e73671567dc8253::$prefixesPsr0;
 
         }, null, ClassLoader::class);
     }
