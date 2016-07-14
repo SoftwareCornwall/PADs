@@ -14,10 +14,10 @@ $app->get('/bye/{name}', function($request, $response, $args) {
 $app->post('/event', function ($request, $response, $args) {
 	$data = $request->getParsedBody(); //creates array from data posted by user
 	return $response->write($data["abc"]);
-
+});
 
 // Get container
-/*$container = $app->getContainer();
+$container = $app->getContainer();
 
 //Register component on container
 $container['view'] = function ($container) {
@@ -36,14 +36,11 @@ $container['view'] = function ($container) {
 };
 
 // Render Twig template in route
-$app->get('/hello/{name}', function ($request, $response, $args) {
+$app->get('/event/{id}', function ($request, $response, $args) {
     return $this->view->render($response, 'sample.html', [
-        'name' => $args['name']
+        'id' => $args['id'] ])->setName('samplE');
 
-    ]);
-})->setName('samplE');
-
-*/
+});
 $app->run();
 
-?>
+
