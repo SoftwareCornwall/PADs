@@ -11,13 +11,17 @@ int main (void)
   {
     if( digitalRead (0))
     {
-        cout << "+" << flush;
-        i++;
+        delay(20);
+        if(digitalRead(0))
+        {
+            cout << "+" << flush;
+        }
     }
     else
+    {
         cout << "-"<< flush;
-    delay(1);
-    cout << i << flush;
+    }
+    delay(125);
   }
 
 
