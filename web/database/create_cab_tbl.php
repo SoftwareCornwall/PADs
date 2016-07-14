@@ -1,6 +1,6 @@
 <?php
 	// Connect to the database and declare the table name
-	include_once 'dbconnect.php';
+	include_once 'db_connect.php';
 	$tblName = "tbl_cabinet";
 
 	// Create an SQL table with the set name and three data fields, including the ID, cabinet name and cabinet status

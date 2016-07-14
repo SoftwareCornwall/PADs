@@ -1,6 +1,6 @@
 <?php
 	// Connect to the database and declare the table name
-	include_once 'dbconnect.php';
+	include_once 'db_connect.php';
 
 	// Delete Table With Post
 	if ($_GET["confirm"]=="y")

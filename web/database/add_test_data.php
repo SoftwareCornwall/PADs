@@ -1,6 +1,6 @@
 <?php
 	// Connect to the database and set table name
-	include_once ('dbconnect.php');
+	include_once ('db_connect.php');
 	$tblName = "tbl_cabinet";
 	$sql = "";
 
