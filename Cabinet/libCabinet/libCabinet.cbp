@@ -14,6 +14,7 @@
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
 				<Compiler>
+					<Add option="-std=c++11" />
 					<Add option="-Wall" />
 					<Add option="-g" />
 				</Compiler>
@@ -34,6 +35,11 @@
 				</Linker>
 			</Target>
 		</Build>
+		<Unit filename="InputPin.hpp" />
+		<Unit filename="Switch.cpp" />
+		<Unit filename="Switch.hpp" />
+		<Unit filename="WiringPiPin.cpp" />
+		<Unit filename="WiringPiPin.hpp" />
 		<Unit filename="test.cpp">
 			<Option compilerVar="CC" />
 		</Unit>
