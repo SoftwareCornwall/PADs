@@ -17,22 +17,33 @@ $app->post('/event', function ($request, $response, $args) {
 
 
 // Get container
-$container = $app->getContainer();
+/*$container = $app->getContainer();
 
-/* Register component on container
+//Register component on container
 $container['view'] = function ($container) {
-    $view = new \Slim\Views\Twig('home/pi/PADs/web/templates', [
-        'cache' => 'path/to/cache'
+    $view = new \Slim\Views\Twig('./templates', [
+//        'cache' => 'home/pi/PADs/web/cache'
+        'cache' => false
     ]);
+
     $view->addExtension(new \Slim\Views\TwigExtension(
         $container['router'],
         $container['request']->getUri()
     ));
 
     return $view;
-*/
-});
 
+};
+
+// Render Twig template in route
+$app->get('/hello/{name}', function ($request, $response, $args) {
+    return $this->view->render($response, 'sample.html', [
+        'name' => $args['name']
+
+    ]);
+})->setName('samplE');
+
+*/
 $app->run();
 
 ?>
