@@ -12,6 +12,8 @@ To create the tables in the database, run tables_create.php.
 To create dummy data, run tables_fill.php
 To delete all the dummy data in the database, run tables_destroy.php
 
+Ensure that you update the username and password variables in both db_create and db_connect to match the username and password chosen for your database. We simply used "root" and "password".
+
 To set up the Apache stuff, I strongly advise you cheat and use XAMPP. Otherwise, you set up apache at your own risk.
 
 To set everything up, follow these commands:
