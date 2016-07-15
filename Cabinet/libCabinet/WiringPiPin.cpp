@@ -1,5 +1,4 @@
 #include "WiringPiPin.hpp"
-#include "WiringPiPin.hpp"
 #include <wiringPi.h>
 
 WiringPiPin::WiringPiPin(int pinNumber) :
