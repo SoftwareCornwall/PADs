@@ -3,9 +3,9 @@
 
 using namespace ::std::chrono;
 
-Switch::Switch(InputPin *doorPin)
+Switch::Switch(InputPin *switchPin)
 {
-    pin = doorPin;
+    pin = switchPin;
     previouslyPressed = false;
     PressedState = false;
 }

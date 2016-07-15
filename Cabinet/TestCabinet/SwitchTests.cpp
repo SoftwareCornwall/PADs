@@ -13,33 +13,28 @@ high_resolution_clock::time_point currentTime()
     return fakeTime;
 }
 
-/*TEST(Switch, A_low_input_pin_indicates_the_switch_is_open)
+class SwitchTests : public Test
 {
+public:
     TestPin pin;
-    pin.state = false;
+    Switch doorSwitch;
 
-    auto start = currentTime();
+    SwitchTests() : doorSwitch{&pin}
+    {
+    }
 
-    milliseconds oneMillisecond{1};
-    fakeTime += 3 * oneMillisecond;
+    void TimeElapseTest(int iTime)
+    {
+        fakeTime += milliseconds(iTime);
+        doorSwitch.StateCheck();
+        ASSERT_FALSE(doorSwitch.IsPressed());
+    }
 
-    auto endTime = currentTime();
+};
 
-    milliseconds d = duration_cast<milliseconds>(endTime - start);
-
-    std::cout << "duration is " << d.count() << std::endl;
-
-    Switch doorSwitch{&pin};
-
-    ASSERT_TRUE(doorSwitch.IsOpen());
-}*/
-
-TEST(Switch, Pin_state_low_indicates_switch_released)
+TEST_F(SwitchTests, Pin_state_low_indicates_switch_released)
 {
-    TestPin pin;
     pin.state = false;
-
-    Switch doorSwitch{&pin};
 
     doorSwitch.StateCheck();
 
@@ -47,20 +42,14 @@ TEST(Switch, Pin_state_low_indicates_switch_released)
 }
 
 
-TEST(Switch, Pin_state_high_for_10ms_indicates_switch_pressed)
+TEST_F(SwitchTests, Pin_state_high_for_10ms_indicates_switch_pressed)
 {
     fakeTime = high_resolution_clock::time_point();
-    TestPin pin;
     pin.state = true;
 
-    Switch doorSwitch{&pin};
+    TimeElapseTest(0);
 
-    doorSwitch.StateCheck();
-    ASSERT_FALSE(doorSwitch.IsPressed());
-
-    fakeTime += milliseconds(9);
-    doorSwitch.StateCheck();
-    ASSERT_FALSE(doorSwitch.IsPressed());
+    TimeElapseTest(9);
 
     fakeTime += milliseconds(1);
     doorSwitch.StateCheck();
@@ -68,36 +57,25 @@ TEST(Switch, Pin_state_high_for_10ms_indicates_switch_pressed)
 
 }
 
-TEST(Switch, Pin_state_high_for_10ms_after_bounce_indicates_switch_pressed)
+TEST_F(SwitchTests, Pin_state_high_for_10ms_after_bounce_indicates_switch_pressed)
 {
     fakeTime = high_resolution_clock::time_point();
-    TestPin pin;
     pin.state = true;
-
-    Switch doorSwitch{&pin};
 
     doorSwitch.StateCheck();
     ASSERT_FALSE(doorSwitch.IsPressed());
 
-    fakeTime += milliseconds(1); //fakeTime = 1ms
     pin.state = false;
-    doorSwitch.StateCheck();
+    TimeElapseTest(1); //fakeTime = 1ms
 
-    fakeTime += milliseconds(1); //fakeTime = 2ms
     pin.state = true;
-    doorSwitch.StateCheck();
+    TimeElapseTest(1); //fakeTime = 2ms
 
-    fakeTime += milliseconds(5); //StateCheck at fakeTime = 7 ms
-    doorSwitch.StateCheck();
-    ASSERT_FALSE(doorSwitch.IsPressed());
+    TimeElapseTest(5); //StateCheck at fakeTime = 7 ms
 
-    fakeTime += milliseconds(3); //fakeTime = 10ms
-    doorSwitch.StateCheck();
-    ASSERT_FALSE(doorSwitch.IsPressed());
+    TimeElapseTest(3); //fakeTime = 10ms
 
     fakeTime += milliseconds(3); //fakeTime = 13ms
     doorSwitch.StateCheck();
     ASSERT_TRUE(doorSwitch.IsPressed());
-
-
 }
