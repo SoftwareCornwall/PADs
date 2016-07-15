@@ -1,19 +1,19 @@
 Database Name: pads_db
 
-tbl_Cabinets:
-  (PK) ID - AUTO_INCREMENT INT
-  Location - STRING *
-  Postcode - STRING
-  Door_Status - STRING ("Open" / "Closed")
-  Defib_Satus - STRING ("Available" / "Not Working" / "Removed")
-  Last_Update - CURRENT TIMESTAMP
+tbl_cabinets:
+  (PK) id - AUTO_INCREMENT INT
+  location - STRING *
+  postcode - STRING
+  door_status - STRING ("Open" / "Closed")
+  defib_satus - STRING ("Available" / "Not Working" / "Removed")
+  last_update - CURRENT TIMESTAMP
 
-tbl_Guardians:
-  (PK) ID - AUTO_INCREMENT INT
-  First_Name - STRING
-  Last_Name - STRING
-  Phone_Number - STRING
-  (FK) Cabinet_ID - INT
+tbl_guardians:
+  (PK) id - AUTO_INCREMENT INT
+  first_name - STRING
+  last_name - STRING
+  phone_number - STRING
+  (FK) cabinet_id - INT
 
 * Need to ask on Monday/Tuesday about what location data will need to be
   stored in our database
