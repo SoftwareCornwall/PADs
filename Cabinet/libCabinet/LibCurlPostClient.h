@@ -3,7 +3,6 @@
 #include <curl/curl.h>
 #include "HTTPPostClient.h"
 
-
 class LibCurlPostClient : public HTTPPostClient
 {
     public:
