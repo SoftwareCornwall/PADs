@@ -8,6 +8,7 @@ TEST(Switch, A_low_input_pin_indicates_the_switch_is_open)
 {
     TestPin pin;
     pin.state = false;
+
     Switch doorSwitch{&pin};
 
     ASSERT_TRUE(doorSwitch.IsOpen());
