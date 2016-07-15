@@ -1,8 +1,16 @@
 <?php 
+
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
-
 require 'vendor/autoload.php';
+$app = new \Slim\App(); 
+
+$app->post('/event', function ($request, $response, $args) {
+	$data = $request->getParsedBody(); //creates array from data posted by user
+	return $response->write($data["id"]);
+});
+
+
 
 $config['displayErrorDetails'] = true;
 $config['addContentLengthHeader'] = false;
@@ -10,7 +18,7 @@ $config['addContentLengthHeader'] = false;
 $config['db']['host']   = "localhost";
 $config['db']['user']   = "root";
 $config['db']['pass']   = "password";
-$config['db']['dbname'] = "pads_db";
+$config['db']['dbname'] = "pads_db";//login to database
 
 $app = new \Slim\App(["settings" => $config]);
 
@@ -30,19 +38,11 @@ $container['db'] = function ($c) {
 
 $result = $container['db'] ->query( 'SELECT * FROM tbl_cabinet;' );
 
-//$query = mysqli_query($container['db'] ->conn, 'SELECT * FROM hedgehogs');
-/*
-while ($row = mysqli_fetch_array($result))
-{
-	echo $row['name'];
-}
-*/
-/*
-while ( $row = $result->fetch_array(MYSQLI_ASSOC) ) {
-		echo $row;
-}
-*/
-/*
+
+
+
+
+
 	// Assign variables holding the server details required to connect
 	$servername = "localhost";
 	$username = "root";
@@ -61,7 +61,7 @@ while ( $row = $result->fetch_array(MYSQLI_ASSOC) ) {
 	{
 		echo"Connected successfully.";
 	}
-*/
+
 
 //Register component on container
 $container['view'] = function ($container) {
@@ -101,7 +101,7 @@ $app->run();
 
 //$app = new \Slim\App();
 
-/*
+
 
 $app->get('/hello/{name}', function($request, $response, $args) {
 	return $response->write("Hello ".$args['name']);
@@ -111,9 +111,6 @@ $app->get('/bye/{name}', function($request, $response, $args) {
 	return $response->write("Bye ".$args['name']);
 });
 
-$app->post('/event', function ($request, $response, $args) {
-	$data = $request->getParsedBody(); //creates array from data posted by user
-	return $response->write($data["abc"]);
-});
-*/
+
+
 
