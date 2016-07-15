@@ -3,13 +3,10 @@ The master branch is outdated. Only completely working iterations will be merged
 
 This repo contains the back-end stuff.
 
-Dependencies:
-
-MySQL
-
-Slim
-
-Twig-view
+Dependencies:  
+* MySQL  
+* Slim  
+* Twig-view  
 
 
 To create the database, run db_create.php.
