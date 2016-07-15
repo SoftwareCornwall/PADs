@@ -17,6 +17,8 @@
 					<Add option="-std=c++11" />
 					<Add option="-Wall" />
 					<Add option="-g" />
+					<Add directory="include" />
+					<Add directory="../libCabinet" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -29,13 +31,20 @@
 				<Compiler>
 					<Add option="-Wall" />
 					<Add option="-O2" />
+					<Add directory="include" />
+					<Add directory="../libCabinet" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
 				</Linker>
 			</Target>
 		</Build>
+		<Unit filename="EventNotifier.cpp" />
+		<Unit filename="EventNotifier.h" />
+		<Unit filename="HTTPPostClient.h" />
 		<Unit filename="InputPin.hpp" />
+		<Unit filename="LibCurlPostClient.cpp" />
+		<Unit filename="LibCurlPostClient.h" />
 		<Unit filename="Switch.cpp" />
 		<Unit filename="Switch.hpp" />
 		<Unit filename="WiringPiPin.cpp" />

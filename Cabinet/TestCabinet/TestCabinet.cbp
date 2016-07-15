@@ -21,6 +21,7 @@
 					<Add library="gtest_main" />
 					<Add library="pthread" />
 					<Add library="Cabinet" />
+					<Add library="curl" />
 					<Add directory="../libCabinet/bin/Debug" />
 				</Linker>
 			</Target>
@@ -41,6 +42,9 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="POSTTests.cpp">
+			<Option target="Debug" />
+		</Unit>
 		<Unit filename="SwitchTests.cpp" />
 		<Unit filename="TestPin.hpp" />
 		<Extensions>
