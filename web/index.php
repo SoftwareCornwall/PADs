@@ -49,9 +49,12 @@ $container = $app->getContainer();
 
 	$query = mysqli_query($conn, 'SELECT * FROM tbl_cabinet');
 
+//$rows= mysqli_fetch_array($query)
+
 	while ($row = mysqli_fetch_array($query))
 	{
-		echo $row['name'];	
+		echo $row['name'];
+	
 	}
 
 //Register component on container
@@ -91,4 +94,4 @@ $app->get('/bye/{name}', function($request, $response, $args) {
 
 
 
-
+?>
