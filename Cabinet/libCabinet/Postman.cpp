@@ -6,11 +6,6 @@ Postman::Postman(std::string serverAddress, HTTPPostClient *client)
     this->serverAddress = serverAddress;
 }
 
-Postman::~Postman()
-{
-    //dtor
-}
-
 bool Postman::sendEventNotification(std::string boxID)
 {
     return postClient->sendPostMsg(serverAddress, boxID);

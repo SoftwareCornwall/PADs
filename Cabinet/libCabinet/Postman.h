@@ -9,7 +9,6 @@ class Postman
 {
     public:
         Postman(std::string serverAddress, HTTPPostClient *client);
-        virtual ~Postman();
         bool sendEventNotification(std::string boxID);
     protected:
     private:

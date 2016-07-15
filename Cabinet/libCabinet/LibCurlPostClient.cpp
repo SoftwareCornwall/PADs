@@ -3,27 +3,11 @@
 #include "LibCurlPostClient.h"
 
 
-LibCurlPostClient::LibCurlPostClient()
-{
-
-}
-
-LibCurlPostClient::~LibCurlPostClient()
-{
-    //dtor
-}
-
 size_t writeData(char *receivedBuffer, size_t receivedSize,
     size_t newMemoryBytes, std::string *stringPointer)
 {
-
-	std::string receivedBufferString = "";
-	receivedBufferString.append(receivedBuffer, newMemoryBytes);
-
-	stringPointer->append(receivedBufferString);
-
+	stringPointer->append(receivedBuffer, newMemoryBytes);
 	return receivedSize * newMemoryBytes;
-
 }
 
 bool LibCurlPostClient::sendPostMsg(std::string URL, std::string data)

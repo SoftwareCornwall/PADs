@@ -6,8 +6,6 @@
 class LibCurlPostClient : public HTTPPostClient
 {
     public:
-        LibCurlPostClient();
-        ~LibCurlPostClient();
         bool sendPostMsg(std::string URL, std::string data);
     protected:
     private:

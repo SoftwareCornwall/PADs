@@ -20,24 +20,6 @@ TEST(LibCurlPOSTTests, Curl_send_attempt_to_GibberishInvalid_returns_false)
 }
 
 /*********************************
- *******HTTP Spy Validation*******/
-
-TEST(HTTPPostClientSpyTests, spy_send_attempt_returns_true)
-{
-    HTTPPostClientSpy testClient;
-    testClient.sendPostMsgResult = true;
-    EXPECT_EQ(true, testClient.sendPostMsg("http://gibberish.invalid", "TEST"));
-}
-
-
-TEST(HTTPPostClientSpyTests, spy_send_attempt_returns_false)
-{
-    HTTPPostClientSpy testClient;
-    testClient.sendPostMsgResult = false;
-    EXPECT_EQ(false, testClient.sendPostMsg("http://gibberish.invalid", "TEST"));
-}
-
-/*********************************
  *******Postman Tests*************/
 
 TEST(PostmanTests, Postman_returns_false_when_client_fails)
