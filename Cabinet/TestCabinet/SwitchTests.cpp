@@ -1,25 +1,81 @@
 #include "Switch.hpp"
 #include "TestPin.hpp"
 #include <gtest/gtest.h>
+#include <chrono>
 
 using namespace ::testing;
+using namespace ::std::chrono;
 
-TEST(Switch, A_low_input_pin_indicates_the_switch_is_open)
+high_resolution_clock::time_point fakeTime;
+
+high_resolution_clock::time_point currentTime()
 {
-    TestPin pin;
-    pin.state = false;
-
-    Switch doorSwitch{&pin};
-
-    ASSERT_TRUE(doorSwitch.IsOpen());
+    return fakeTime;
 }
 
-TEST(Switch, A_high_input_pin_indicates_the_switch_is_not_open)
+class SwitchTests : public Test
 {
+public:
     TestPin pin;
+    Switch doorSwitch;
+
+    SwitchTests() : doorSwitch{&pin}
+    {
+    }
+
+    void TimeElapseTest(int iTime)
+    {
+        fakeTime += milliseconds(iTime);
+        doorSwitch.StateCheck();
+        ASSERT_FALSE(doorSwitch.IsPressed());
+    }
+
+};
+
+TEST_F(SwitchTests, Pin_state_low_indicates_switch_released)
+{
+    pin.state = false;
+
+    doorSwitch.StateCheck();
+
+    ASSERT_FALSE(doorSwitch.IsPressed());
+}
+
+
+TEST_F(SwitchTests, Pin_state_high_for_10ms_indicates_switch_pressed)
+{
+    fakeTime = high_resolution_clock::time_point();
     pin.state = true;
 
-    Switch doorSwitch{&pin};
+    TimeElapseTest(0);
 
-    ASSERT_FALSE(doorSwitch.IsOpen());
+    TimeElapseTest(9);
+
+    fakeTime += milliseconds(1);
+    doorSwitch.StateCheck();
+    ASSERT_TRUE(doorSwitch.IsPressed());
+
+}
+
+TEST_F(SwitchTests, Pin_state_high_for_10ms_after_bounce_indicates_switch_pressed)
+{
+    fakeTime = high_resolution_clock::time_point();
+    pin.state = true;
+
+    doorSwitch.StateCheck();
+    ASSERT_FALSE(doorSwitch.IsPressed());
+
+    pin.state = false;
+    TimeElapseTest(1); //fakeTime = 1ms
+
+    pin.state = true;
+    TimeElapseTest(1); //fakeTime = 2ms
+
+    TimeElapseTest(5); //StateCheck at fakeTime = 7 ms
+
+    TimeElapseTest(3); //fakeTime = 10ms
+
+    fakeTime += milliseconds(3); //fakeTime = 13ms
+    doorSwitch.StateCheck();
+    ASSERT_TRUE(doorSwitch.IsPressed());
 }
