@@ -7,7 +7,7 @@ using namespace testing;
 
 /*********************************
  ****Actual Libcurl Post**********/
-TEST(LibCurlPOSTTests, Curl_send_attempt_to_HTTPBinOrg_returns_true)
+/*TEST(LibCurlPOSTTests, Curl_send_attempt_to_HTTPBinOrg_returns_true)
 {
     LibCurlPostClient testClient;
     EXPECT_EQ(true, testClient.sendPostMsg("http://httpbin.org/post", "TEST"));
@@ -17,7 +17,7 @@ TEST(LibCurlPOSTTests, Curl_send_attempt_to_GibberishInvalid_returns_false)
 {
     LibCurlPostClient testClient;
     EXPECT_EQ(false, testClient.sendPostMsg("http://gibberish.invalid", "TEST"));
-}
+}*/
 
 /*********************************
  *******Postman Tests*************/
