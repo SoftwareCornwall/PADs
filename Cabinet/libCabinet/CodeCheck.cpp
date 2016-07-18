@@ -2,8 +2,10 @@
 #include <string>
 #include <iostream>
 
-CodeCheck::CodeCheck()
+CodeCheck::CodeCheck(OutputPin *OutputPin)
 {
+    this->doorOutputPin = OutputPin;
+
     inputConversion[0]='0';
     inputConversion[1]='1';
     inputConversion[2]='2';
@@ -24,6 +26,7 @@ bool CodeCheck::inputCheck(std::string inputCode)
 std::string correctCode = "1234";
 if((inputCode == correctCode))
     {
+        doorOutputPin->State(true);
         return true;
     }
     return false;
@@ -52,5 +55,9 @@ void CodeCheck::keyPressed(int keyID)
     {
         codeEntered += inputConversion[keyID];
     }
+}
+bool CodeCheck::getPinState()
+{
+    return doorOutputPin->getState();
 }
 
