@@ -7,7 +7,7 @@
 using namespace std;
 chrono::high_resolution_clock::time_point currentTime()
 {
-    return high_resolution_clock::now();
+    return chrono::high_resolution_clock::now();
 }
 
 int main()
