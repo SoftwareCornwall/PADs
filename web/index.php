@@ -25,37 +25,24 @@ $app = new \Slim\App(["settings" => $config]);
 // Get container
 $container = $app->getContainer();
 
-	// Assign variables holding the server details required to connect
-	$servername = "localhost";
-	$username = "root";
-	$password = "password";
-	$dbName = "pads_db";
+// Assign variables holding the server details required to connect
+$servername = "localhost";
+$username = "root";
+$password = "password";
+$dbName = "pads_db";
 
-	// Create aconnection using these variables
-	$conn = mysqli_connect($servername, $username, $password, $dbName);
+// Create aconnection using these variables
+$conn = mysqli_connect($servername, $username, $password, $dbName);
 
-	// Check that the connection was successful
-	if (!$conn) {
-		// If the connection was not successful, echo a connection error and stop the PHP scripts
-		die("Connection failed: " . mysqli_connect_error());
-	}
-/*
-	}
-	else
-	{
-		echo"Connected successfully.";
-	}
-*/
+// Check that the connection was successful
+if (!$conn) {
+	// If the connection was not successful, echo a connection error and stop the PHP scripts
+	die("Connection failed: " . mysqli_connect_error());
+}
 
-	$query = mysqli_query($conn, 'SELECT * FROM tbl_cabinet');
 
-//$rows= mysqli_fetch_array($query)
+$query = mysqli_query($conn, 'SELECT * FROM tbl_cabinet');
 
-	while ($row = mysqli_fetch_array($query))
-	{
-		echo $row['name'];
-	
-	}
 
 //Register component on container
 $container['view'] = function ($container) {
@@ -74,15 +61,27 @@ $container['view'] = function ($container) {
 
 // Render Twig template in route
 $app->get('/event/{id}', function ($request, $response, $args) {
-    return $this->view->render($response, 'sample.html', [//calls sample.html
-        'id' => $args['id'] ]);
+
+	$conn= mysqli_connect("localhost", "root", "password", "pads_db")//creates connection!>
+				or die ("Sorry -  could not connect to MySQL");
+
+	$result = mysqli_query($conn, 'SELECT * FROM tbl_cabinet'); //takes everything from tbl_cabinet, assigns to value $query!>
+
+	$tplArray = array(); 
+	while ( $row = mysqli_fetch_array ( $result ) )
+	{
+	    $tplArray[] = array (
+		 'id' => $row ['id'],
+		 'name' => $row ['name'] 
+	    );
+	}
+
+
+    return $this->view->render($response, 'sample.html', //calls sample.html
+        array('cabinets' => $tplArray)); //   'id' => $args['id'] ]);
 });
 
-
 $app->run();
-//$app = new \Slim\App();
-
-
 
 $app->get('/hello/{name}', function($request, $response, $args) {
 	return $response->write("Hello ".$args['name']);

@@ -1,5 +1,5 @@
 <?php
-	// Assign variables holding the server details required to connect
+	// Database Details
 	$servername = "localhost";
 	$username = "root";
 	$password = "password";
