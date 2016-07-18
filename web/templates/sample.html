@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> sample title </title>
+
+</head>
+<body>
+<style>
+
+table {
+	width: 100%;
+	color:black;
+	background-color:white;
+	margin: 1px auto;
+	border: 10px solid black
+	padding: 10px
+}
+
+thead {
+	background-color:lightgreen;
+}
+
+</style>
+
+<h1>Fleet PADs</h1>
+<table>
+<thead><tr><td>id</td><td>name</td></tr></thead>
+<tbody>
+{% for cab in cabinets %}
+    <tr><td>{{ cab.id }}</td><td>{{ cab.name }}</td></tr>
+{% else %}
+    <tr><td colspan=2>No users have been found.</td></tr>
+{% endfor %}
+</tbody>
+</table>
+</body>
+</html>
