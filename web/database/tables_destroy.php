@@ -6,13 +6,33 @@
 	if ($_GET["confirm"]=="y")
 	{
 		// Delete the table
-		$sql = "DELETE FROM tbl_cabinet";
+		$sql = "DROP TABLE tbl_cabinets";
 
 		// Check if the table creation was successful, and display an appropriate message
 		if ($conn->query($sql) === TRUE) {
-			echo "<br>Table ".$tblName." cleared successfully";
+			echo "</p>Cabinets table cleared successfully</p>";
 		} else {
-			echo "Error clearing table: " . $conn->error;
+			echo "</p>Error clearing table: " . $conn->error . "</p>";
+		}
+
+		// Delete the table
+		$sql = "DROP TABLE tbl_status";
+
+		// Check if the table creation was successful, and display an appropriate message
+		if ($conn->query($sql) === TRUE) {
+			echo "</p>Status table cleared successfully.</p>";
+		} else {
+			echo "</p>Error clearing table: " . $conn->error . "</p>";
+		}
+
+		// Delete the table
+		$sql = "DROP TABLE tbl_guardians";
+
+		// Check if the table creation was successful, and display an appropriate message
+		if ($conn->query($sql) === TRUE) {
+			echo "</p>Guardians table cleared successfully.</p>";
+		} else {
+			echo "</p>Error clearing table: " . $conn->error . "</p>";
 		}
 	}
 	else
