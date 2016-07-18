@@ -17,27 +17,26 @@
     // If data was posted, add it to the status table
     if(!empty($data['cabinet_id']) && !empty($data['door_status']) && !empty($data['defib_status']))
     {
+      // Assign the posted variables
       $cabinet_id = $data['cabinet_id'];
       $door_status = $data['door_status'];
       $defib_status = $data['defib_status'];
 
-      // Update server
-      $sql = "INSERT INTO tbl_status (cabinet_id, door_status, defib_status)
-      VALUES ('".$cabinet_id."', '".$door_status."', '".$defib_status."')";
+      // Prepare and bind the statement
+      $stmt = $conn->prepare("INSERT INTO tbl_status (cabinet_id, door_status, defib_status) VALUES (?, ?, ?)");
+      $stmt->bind_param("sss", $cabinet_id, $door_status, $defib_status);
 
-      // Check if it was successful
-      if ($res=mysqli_query($conn, $sql)) {
-        echo "Updated cabinet status.";
-      } else {
-        echo "Error: " . mysqli_error($conn);
-      }
+      // Execute the statement
+      $stmt->execute();
+
+      // Close the database connection
+      $stmt->close();
+      $conn->close();
+
+      echo "Status update completed.";
     } else {
-      // Echo's a message if there is no data
-      echo "No JSON post data.</br>";
+      echo "No JSON post data.";
     }
-
-    // Close the database connection
-    mysqli_close($conn);
   ?>
 </body>
 </html>
