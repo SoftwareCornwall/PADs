@@ -62,18 +62,40 @@
 	}
 
 
-	//Create stored procedures
+	//Create GetAllCabinetRecords stored procedure 
 	$sql = "CREATE PROCEDURE GetAllCabinetRecords()";
 	$sql += "  BEGIN";
-	$sql += "    SELECT * FROM tbl_cabinets";
+	$sql += "    SELECT * FROM tbl_cabinets;";
 	$sql += "  END";
 	if (mysqli_query($conn, $sql)) {
-		echo "<p>Database created successfully.</p>";
+		echo "<p>Created GetAllCabinetRecords stored procedure successfully.</p>";
 	} else {
-		echo "<p>Error creating database: " . mysqli_error($conn) . "</p>";
+		echo "<p>Error creating stored procedure GetAllCabinetRecords: " . mysqli_error($conn) . "</p>";
 	}
 
+	//Create GetCabinetRecord stored procedure
+	$sql = "CREATE PROCEDURE GetCabinetRecord(IN cabID INT)";
+	$sql += "  BEGIN";
+	$sql += "    SELECT * FROM tbl_cabinets WHERE id = cabID;";
+	$sql += "  END";
+	if (mysqli_query($conn, $sql)) {
+		echo "<p>Created GetCabinetRecord stored procedure successfully.</p>";
+	} else {
+		echo "<p>Error creating stored procedure GetCabinetRecord: " . mysqli_error($conn) . "</p>";
+	}
 
+	//Create UpdateCabinetDetails stored procedures
+	$sql = "CREATE PROCEDURE `UpdateCabinetDetails`(IN `cabID` INT, IN `NewLocation` VARCHAR(30), IN `NewPostcode` VARCHAR(30)) NOT DETERMINISTIC NO SQL SQL SECURITY DEFINER BEGIN \n"
+    . "UPDATE tbl_cabinets \n"
+    . "SET tbl_cabinets.location = NewLocation, \n"
+    . "tbl_cabinets.postcode = NewPostcode \n"
+    . "WHERE tbl_cabinets.id = cabID; \n"
+    . "END";
+	if (mysqli_query($conn, $sql)) {
+		echo "<p>Created UpdateCabinetDetails stored procedure successfully.</p>";
+	} else {
+		echo "<p>Error creating stored procedure UpdateCabinetDetails: " . mysqli_error($conn) . "</p>";
+	}
 
 	// Close the connection
 	$conn->close();
