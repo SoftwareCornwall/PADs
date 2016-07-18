@@ -22,7 +22,7 @@
 	// Define status table
 	$sql = "CREATE TABLE tbl_status (
 		id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-		cabinet_id INT NOT NULL,
+		cabinet_id VARCHAR(200) NOT NULL,
 		door_status VARCHAR(200) NOT NULL,
 		defib_status VARCHAR(200) NOT NULL,
 		last_update TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
