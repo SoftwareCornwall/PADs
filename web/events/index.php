@@ -15,7 +15,7 @@
       if(isset($rest_json['status']) && !empty($rest_json['status']))
       {
         // Echo's the current value of 'status'.
-        echo "JSON Post: ".$_POST['status']."</br>";
+        echo "JSON Post: ".$rest_json['status']."</br>";
       } else {
         // Echo's a message if there is no data
         echo "No JSON post data.</br>";
