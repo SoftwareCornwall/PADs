@@ -1,5 +1,6 @@
 #include <chrono>
 #include <gtest/gtest.h>
+#include <functional>
 
 #include "HTTPPostClientSpy.h"
 #include "Postman.h"
@@ -16,39 +17,17 @@ using namespace ::std::chrono;
 class CabinetTests : public Test
 {
 public:
+
     std::string boxID = "114";
     std::string URL = "http://gibberish.invalid/";
-    TestPin pin;
-    Switch doorSwitch;
     HTTPPostClientSpy client;
     Postman postie;
     Cabinet cabinet;
 
-    CabinetTests() : doorSwitch{&pin},
-                     client(),
+    CabinetTests() : client(),
                      postie(URL, &client),
-                     cabinet(&postie, &doorSwitch, boxID)
+                     cabinet(&postie, boxID)
     {
-    }
-
-    void TimeElapseTest(int iTime)
-    {
-        fakeTime += milliseconds(iTime);
-        doorSwitch.StateCheck();
-        ASSERT_FALSE(doorSwitch.IsPressed());
-    }
-
-    void setDoorSwitchState(bool state)
-    {
-        fakeTime = high_resolution_clock::time_point();
-        pin.state = state;
-
-        TimeElapseTest(0);
-
-        TimeElapseTest(9);
-
-        fakeTime += milliseconds(1);
-        doorSwitch.StateCheck();
     }
 
 };
@@ -56,7 +35,7 @@ public:
 TEST_F(CabinetTests, Cabinet_sends_event_after_door_open_event)
 {
 
-    setDoorSwitchState(false);
+    //setDoorSwitchState(false);
 
     client.sendPostMsgResult = true;
 
@@ -66,7 +45,7 @@ TEST_F(CabinetTests, Cabinet_sends_event_after_door_open_event)
     "  \"defib_status\" : \"Available\" \n"
     "}";
 
-    ASSERT_TRUE(cabinet.ServiceIter());
+    cabinet.DoorEventCallback(true);
     ASSERT_EQ(boxPOSTData, client.lastPOSTData);
     ASSERT_EQ(URL, client.lastPOSTURL);
 

@@ -1,6 +1,7 @@
 #include <iostream>
 #include <chrono>
 #include <wiringPi.h>
+#include <functional>
 
 #include "WiringPiPin.hpp"
 #include "LibCurlPostClient.h"
@@ -26,6 +27,8 @@ int main()
     LibCurlPostClient client = LibCurlPostClient();
     Postman pat(URL, &client);
     Cabinet cabinet(&pat, &doorSwitch, boxID);
+
+    auto doorEventCallback = std::bind(&Cabinet::DoorEventCallback, _1);
 
     cabinet.Service();
 

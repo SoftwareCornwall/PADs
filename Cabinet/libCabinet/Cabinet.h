@@ -7,10 +7,9 @@
 class Cabinet
 {
     public:
-        Cabinet(Postman *postie, Switch *doorSwitch, std::string boxID);
+        Cabinet(Postman *postie, std::string boxID);
         virtual ~Cabinet();
-        void Service();
-        bool ServiceIter();
+        bool DoorEventCallback(bool doorOpen);
     protected:
     private:
         Postman *postie;
