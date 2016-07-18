@@ -3,8 +3,6 @@
 #include <thread>
 #include <chrono>
 
-#define SERVICE_SLEEP_TIME_MILLISECONDS 1
-
 using namespace ::std::chrono;
 
 Switch::Switch(InputPin *switchPin, doorCallback doorEventCallback)
@@ -53,24 +51,6 @@ void Switch::StateCheck()
 void Switch::Service()
 {
 
-    while(true)
-    {
-        ServiceIter();
-
-        /* Limit how fast ServiceIter is run, otherwise will deplete the
-           battery quicker than it should. */
-
-        std::this_thread::sleep_for(std::chrono::milliseconds(SERVICE_SLEEP_TIME_MILLISECONDS));
-
-    }
-
-}
-
-bool Switch::ServiceIter()
-{
-
     StateCheck();
-
-    return true;
 
 }

@@ -14,7 +14,6 @@ public:
     Switch(InputPin *doorPin, doorCallback doorEventCallback);
     bool IsPressed();
     void StateCheck();
-    bool ServiceIter();
     void Service();
 private:
     InputPin *pin;
