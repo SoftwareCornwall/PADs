@@ -4,6 +4,10 @@ tbl_cabinets:
   (PK) id - AUTO_INCREMENT INT
   location - STRING *
   postcode - STRING
+
+tbl_status:
+  (PK) id - AUTO_INCREMENT INT
+  (FK) cabinet_id - AUTO_INCREMENT INT
   door_status - STRING ("Open" / "Closed")
   defib_satus - STRING ("Available" / "Not Working" / "Removed")
   last_update - CURRENT TIMESTAMP

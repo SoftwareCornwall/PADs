@@ -7,10 +7,7 @@
 	$sql = "CREATE TABLE tbl_cabinets (
 		id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 		location VARCHAR(200) NOT NULL,
-		postcode VARCHAR(200) NOT NULL,
-		door_status VARCHAR(200) NOT NULL,
-		defig_status VARCHAR(200) NOT NULL,
-		last_update TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+		postcode VARCHAR(200) NOT NULL
 	)";
 
 	// Create cabinets table
@@ -18,6 +15,24 @@
 		echo "<p>Cabinets table created successfully.</p>";
 	} else {
 		echo "<p>Cabinets table creation failed.</br>";
+		echo "Error: " . $conn->error . "</p>";
+		$errors_occurred = 1;
+	}
+
+	// Define status table
+	$sql = "CREATE TABLE tbl_status (
+		id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+		cabinet_id INT NOT NULL,
+		door_status VARCHAR(200) NOT NULL,
+		defib_status VARCHAR(200) NOT NULL,
+		last_update TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+	)";
+
+	// Create status table
+	if ($conn->multi_query($sql) === TRUE) {
+		echo "<p>Status table created successfully.</p>";
+	} else {
+		echo "<p>Status table creation failed.</br>";
 		echo "Error: " . $conn->error . "</p>";
 		$errors_occurred = 1;
 	}
