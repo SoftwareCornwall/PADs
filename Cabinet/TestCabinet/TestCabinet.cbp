@@ -42,7 +42,6 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="CodeCheck.cpp" />
 		<Unit filename="CodeCheckTest.cpp" />
 		<Unit filename="HTTPPostClientSpy.cpp" />
 		<Unit filename="HTTPPostClientSpy.h" />

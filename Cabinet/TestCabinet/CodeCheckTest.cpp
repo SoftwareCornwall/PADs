@@ -20,3 +20,41 @@ TEST(CodeCheckTests, test_if_the_strings_match)
     CodeCheck checker;
     EXPECT_EQ(true, checker.inputCheck("1234"));
 }
+
+TEST(CodeCheckTests, test_if_key_input_is_valid_1234e)
+{
+    CodeCheck checker;
+    checker.keyPressed(1);
+    checker.keyPressed(2);
+    checker.keyPressed(3);
+    checker.keyPressed(4);
+    checker.keyPressed(10);
+    EXPECT_EQ("1234", checker.getCodeEntered());
+}
+
+TEST(CodeCheckTests, test_if_key_input_is_valid_12e)//e should reset code if code incorrect
+{
+    CodeCheck checker;
+    checker.keyPressed(1);
+    checker.keyPressed(2);
+    checker.keyPressed(10);
+    EXPECT_EQ("", checker.getCodeEntered());
+}
+
+TEST(CodeCheckTests, test_if_key_input_is_valid_12c)
+{
+    CodeCheck checker;
+    checker.keyPressed(1);
+    checker.keyPressed(2);
+    checker.keyPressed(11);
+    EXPECT_EQ("", checker.getCodeEntered());
+}
+TEST(CodeCheckTests, test_if_key_input_is_valid_12c2)
+{
+    CodeCheck checker;
+    checker.keyPressed(1);
+    checker.keyPressed(2);
+    checker.keyPressed(11);
+    checker.keyPressed(2);
+    EXPECT_EQ("2", checker.getCodeEntered());
+}
