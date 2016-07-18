@@ -1,17 +1,11 @@
 #include "Switch.hpp"
 #include "TestPin.hpp"
+#include "TestTime.hpp"
 #include <gtest/gtest.h>
 #include <chrono>
 
 using namespace ::testing;
 using namespace ::std::chrono;
-
-high_resolution_clock::time_point fakeTime;
-
-high_resolution_clock::time_point currentTime()
-{
-    return fakeTime;
-}
 
 class SwitchTests : public Test
 {

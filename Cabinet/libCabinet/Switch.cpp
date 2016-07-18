@@ -41,4 +41,5 @@ void Switch::StateCheck()
         previouslyPressed = true;
 
     }
+
 }
