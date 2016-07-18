@@ -41,20 +41,24 @@
 		</Build>
 		<Unit filename="Cabinet.cpp" />
 		<Unit filename="Cabinet.h" />
+		<Unit filename="CodeCheck.cpp" />
+		<Unit filename="CodeCheck.hpp" />
 		<Unit filename="CurrentTime.hpp" />
 		<Unit filename="HTTPPostClient.h" />
 		<Unit filename="InputPin.hpp" />
 		<Unit filename="LibCurlPostClient.cpp" />
 		<Unit filename="LibCurlPostClient.h" />
+		<Unit filename="MatrixKeypad.cpp" />
+		<Unit filename="MatrixKeypad.hpp" />
+		<Unit filename="MatrixKeypadReader.cpp" />
+		<Unit filename="MatrixKeypadReader.hpp" />
+		<Unit filename="OutputPin.hpp" />
 		<Unit filename="Postman.cpp" />
 		<Unit filename="Postman.h" />
 		<Unit filename="Switch.cpp" />
 		<Unit filename="Switch.hpp" />
 		<Unit filename="WiringPiPin.cpp" />
 		<Unit filename="WiringPiPin.hpp" />
-		<Unit filename="test.cpp">
-			<Option compilerVar="CC" />
-		</Unit>
 		<Extensions>
 			<code_completion />
 			<debugger />
