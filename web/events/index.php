@@ -9,7 +9,7 @@
   <?php
     // Connect to the database
     include_once ('../database/db_connect.php');
-
+    
     // JSON Post Method
     $data = file_get_contents("php://input");
     $data = json_decode($data, true);
