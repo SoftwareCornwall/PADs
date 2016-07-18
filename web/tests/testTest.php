@@ -1,5 +1,6 @@
 <?php
-use PHPUnit\Framework\TestCase;
+use PHPUnit/Framework/TestCase;
+include ('../webtest.php');
 
 // Test MySQL CRUD outputs
 class DBTest extends TestCase
@@ -8,7 +9,7 @@ class DBTest extends TestCase
     public function test1()
     {
         // Assert
-        $this->assertEquals(-1, $b->someFunction());
+        $this->assertEquals("test", testFunction());
 
     }
 
