@@ -61,6 +61,20 @@
 		echo "Please ensure that you have created the database first.</p>";
 	}
 
+
+	//Create stored procedures
+	$sql = "CREATE PROCEDURE GetAllCabinetRecords()";
+	$sql += "  BEGIN";
+	$sql += "    SELECT * FROM tbl_cabinets";
+	$sql += "  END";
+	if (mysqli_query($conn, $sql)) {
+		echo "<p>Database created successfully.</p>";
+	} else {
+		echo "<p>Error creating database: " . mysqli_error($conn) . "</p>";
+	}
+
+
+
 	// Close the connection
 	$conn->close();
 ?>
