@@ -4,7 +4,7 @@
 class OutputPin
 {
 public:
-    virtual ~OutputPin() { }
+    virtual ~OutputPin() { };
     virtual void State(bool state) = 0;
 };
 
