@@ -1,43 +1,33 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<?php
+// Connect to the database
+include_once ('../database/db_connect.php');
 
-<head>
-  <title>Cabinet Event</title>
-</head>
+// JSON Post Method
+$data = file_get_contents("php://input");
+$data = json_decode($data, true);
 
-<body>
-  <?php
-    // Connect to the database
-    include_once ('../database/db_connect.php');
-    
-    // JSON Post Method
-    $data = file_get_contents("php://input");
-    $data = json_decode($data, true);
+// If data was posted, add it to the status table
+if(!empty($data['cabinet_id']) && !empty($data['door_status']) && !empty($data['defib_status']))
+{
+  // Assign the posted variables
+  $cabinet_id = $data['cabinet_id'];
+  $door_status = $data['door_status'];
+  $defib_status = $data['defib_status'];
 
-    // If data was posted, add it to the status table
-    if(!empty($data['cabinet_id']) && !empty($data['door_status']) && !empty($data['defib_status']))
-    {
-      // Assign the posted variables
-      $cabinet_id = $data['cabinet_id'];
-      $door_status = $data['door_status'];
-      $defib_status = $data['defib_status'];
+  // Prepare and bind the statement
+  $stmt = $conn->prepare("INSERT INTO tbl_status (cabinet_id, door_status, defib_status) VALUES (?, ?, ?)");
+  $stmt->bind_param("sss", $cabinet_id, $door_status, $defib_status);
+  $stmt->execute();
+  $stmt->close();
+  echo "Status update completed.";
 
-      // Prepare and bind the statement
-      $stmt = $conn->prepare("INSERT INTO tbl_status (cabinet_id, door_status, defib_status) VALUES (?, ?, ?)");
-      $stmt->bind_param("sss", $cabinet_id, $door_status, $defib_status);
+  if ($door_status == "Open") {
+    include 'send_sms.php';
+  } else {
+    echo "No JSON post data.";
+  }
+}
 
-      // Execute the statement
-      $stmt->execute();
-
-      // Close the database connection
-      $stmt->close();
-      $conn->close();
-
-      echo "Status update completed.";
-    } else {
-      echo "No JSON post data.";
-    }
-  ?>
-</body>
-
-</html>
+// Close the database connection
+$conn->close();
+?>
