@@ -6,43 +6,38 @@
 </head>
 
 <body>
-  <p>Cabinet request revieved.</p>
+  <?php
+    // Connect to the database
+    include_once ('../database/db_connect.php');
+    
+    // JSON Post Method
+    $data = file_get_contents("php://input");
+    $data = json_decode($data, true);
 
-  <p>
-    <?php
-      // JSON Post Method
-      $rest_json = file_get_contents("php://input");
-      if(isset($rest_json['status']) && !empty($rest_json['status']))
-      {
-        // Echo's the current value of 'status'.
-        echo "JSON Post: ".$_POST['status']."</br>";
-      } else {
-        // Echo's a message if there is no data
-        echo "No JSON post data.</br>";
-      }
+    // If data was posted, add it to the status table
+    if(!empty($data['cabinet_id']) && !empty($data['door_status']) && !empty($data['defib_status']))
+    {
+      // Assign the posted variables
+      $cabinet_id = $data['cabinet_id'];
+      $door_status = $data['door_status'];
+      $defib_status = $data['defib_status'];
 
-      // Standard Post Method
-      if(isset($_POST['status']) && !empty($_POST['status']))
-      {
-        // Echo's the current value of 'status'.
-        echo "Standard Post: ".$_POST['status']."</br>";
-      } else {
-        // Echo's a message if there is no data
-        echo "No standard POST data.</br>";
-      }
-    ?>
-  </p>
+      // Prepare and bind the statement
+      $stmt = $conn->prepare("INSERT INTO tbl_status (cabinet_id, door_status, defib_status) VALUES (?, ?, ?)");
+      $stmt->bind_param("sss", $cabinet_id, $door_status, $defib_status);
 
-  <!-- Form to test current post. -->
-  <form action="./" method="post">
-    <!-- Label -->
-    <label for="name">Name:</label>
-    <!-- Text field to add name -->
-    <input type="text" name="status" id="status" /><p />
-    <!-- Submit Button-->
-    <input type="submit" name="submit" value="Submit" />
-  </form>
+      // Execute the statement
+      $stmt->execute();
 
+      // Close the database connection
+      $stmt->close();
+      $conn->close();
+
+      echo "Status update completed.";
+    } else {
+      echo "No JSON post data.";
+    }
+  ?>
 </body>
 
 </html>
