@@ -15,7 +15,7 @@ $sql = "";
 	 
 	// Insert new row with fake details
 	$sql .= "INSERT INTO tbl_cabinets (location, postcode)
-	VALUES ('".$_POST["pad_l"]."','".$_POST["pad_id"]."');";
+	VALUES ('".$_POST["pad_id"]."','".$_POST["pad_l"].",'".$_POST["pad_post"].",'".$_POST["pad_door"].",'".$_POST["pad_defib"]."');";
 	//echo "$sql";
 	
 
