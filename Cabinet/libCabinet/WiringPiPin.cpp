@@ -7,7 +7,18 @@ WiringPiPin::WiringPiPin(int pinNumber) :
     pinMode(pinNumber, INPUT);
 }
 
+void WiringPiPin::ConfigureAsOutput()
+{
+    pinMode(pinNumber, OUTPUT);
+    State(false);
+}
+
 bool WiringPiPin::State()
 {
     return digitalRead(pinNumber);
+}
+
+void WiringPiPin::State(bool state)
+{
+    digitalWrite(pinNumber, state ? HIGH : LOW);
 }

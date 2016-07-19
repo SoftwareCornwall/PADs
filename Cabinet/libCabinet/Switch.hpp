@@ -1,20 +1,26 @@
 #ifndef SWITCH_H
 #define SWITCH_H
 
-#include "InputPin.hpp"
+#include <functional>
 #include <chrono>
+
+#include "InputPin.hpp"
+
+using doorCallback = std::function<void(bool)>;
 
 class Switch
 {
+public:
+    Switch(InputPin *doorPin, doorCallback doorEventCallback);
+    bool IsPressed();
+    void StateCheck();
+    void Service();
 private:
     InputPin *pin;
     bool PressedState;
     bool previouslyPressed;
     std::chrono::high_resolution_clock::time_point firstTime;
-public:
-    Switch(InputPin *doorPin);
-    bool IsPressed();
-    void StateCheck();
+    doorCallback doorCallbackFunction;
 };
 
 #endif

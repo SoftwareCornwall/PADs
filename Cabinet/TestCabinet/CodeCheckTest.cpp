@@ -1,6 +1,5 @@
 #include <gtest/gtest.h>
 #include "CodeCheck.hpp"
-#include "TestOutputPin.h"
 
 using namespace testing;
 

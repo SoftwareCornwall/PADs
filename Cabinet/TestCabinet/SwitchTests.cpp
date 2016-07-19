@@ -1,25 +1,33 @@
 #include "Switch.hpp"
 #include "TestPin.hpp"
+#include "TestTime.hpp"
+#include "Cabinet.h"
+#include "HTTPPostClientSpy.h"
 #include <gtest/gtest.h>
 #include <chrono>
+#include <functional>
+#include <string>
 
 using namespace ::testing;
 using namespace ::std::chrono;
 
-high_resolution_clock::time_point fakeTime;
-
-high_resolution_clock::time_point currentTime()
-{
-    return fakeTime;
-}
-
 class SwitchTests : public Test
 {
 public:
+
+    std::string boxID = "114";
+    std::string URL = "http://gibberish.invalid/";
+    HTTPPostClientSpy client;
+    Postman postie;
+    Cabinet cabinet;
+    doorCallback doorSwitchCallback;
     TestPin pin;
     Switch doorSwitch;
 
-    SwitchTests() : doorSwitch{&pin}
+    SwitchTests() : postie(URL, &client),
+                    cabinet(&postie, boxID),
+                    doorSwitchCallback(std::bind(&Cabinet::DoorEventCallback, cabinet, std::placeholders::_1)),
+                    doorSwitch{&pin, doorSwitchCallback}
     {
     }
 

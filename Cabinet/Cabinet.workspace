@@ -8,5 +8,8 @@
 		<Project filename="Cabinet/Cabinet.cbp">
 			<Depends filename="libCabinet/libCabinet.cbp" />
 		</Project>
+		<Project filename="HardwareDemo/HardwareDemo.cbp">
+			<Depends filename="libCabinet/libCabinet.cbp" />
+		</Project>
 	</Workspace>
 </CodeBlocks_workspace_file>

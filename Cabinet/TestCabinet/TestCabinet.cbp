@@ -15,7 +15,6 @@
 					<Add option="-std=c++11" />
 					<Add option="-g" />
 					<Add directory="../libCabinet" />
-					<Add directory="include" />
 				</Compiler>
 				<Linker>
 					<Add library="gtest" />
@@ -33,7 +32,6 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
-					<Add directory="include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -44,7 +42,10 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="CabinetTests.cpp" />
+		<Unit filename="CodeCheck.cpp" />
 		<Unit filename="CodeCheckTest.cpp" />
+		<Unit filename="HBridgeLockTests.cpp" />
 		<Unit filename="HTTPPostClientSpy.cpp" />
 		<Unit filename="HTTPPostClientSpy.h" />
 		<Unit filename="MatixKeypadTests.cpp" />
@@ -54,8 +55,8 @@
 		<Unit filename="POSTTests.cpp" />
 		<Unit filename="SwitchTests.cpp" />
 		<Unit filename="TestPin.hpp" />
-		<Unit filename="include/TestOutputPin.h" />
-		<Unit filename="src/TestOutputPin.cpp" />
+		<Unit filename="TestTime.cpp" />
+		<Unit filename="TestTime.hpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />

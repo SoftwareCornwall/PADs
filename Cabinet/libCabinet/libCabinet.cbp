@@ -39,9 +39,13 @@
 				</Linker>
 			</Target>
 		</Build>
+		<Unit filename="Cabinet.cpp" />
+		<Unit filename="Cabinet.h" />
 		<Unit filename="CodeCheck.cpp" />
 		<Unit filename="CodeCheck.hpp" />
 		<Unit filename="CurrentTime.hpp" />
+		<Unit filename="HBridgeLock.cpp" />
+		<Unit filename="HBridgeLock.hpp" />
 		<Unit filename="HTTPPostClient.h" />
 		<Unit filename="InputPin.hpp" />
 		<Unit filename="LibCurlPostClient.cpp" />
