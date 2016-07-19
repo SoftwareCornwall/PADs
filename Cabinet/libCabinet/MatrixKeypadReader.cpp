@@ -1,4 +1,6 @@
 #include "MatrixKeypadReader.hpp"
+#include <thread>
+#include <chrono>
 
 MatrixKeypadReader::MatrixKeypadReader(OutputPin *column1, OutputPin *column2,
                                        OutputPin *column3, InputPin *row1,
@@ -25,6 +27,8 @@ uint16_t MatrixKeypadReader::ReadColumn(OutputPin *column) const
     uint16_t sum = 0;
 
     column->State(true);
+
+    std::this_thread::sleep_for(std::chrono::microseconds(10));
 
     sum |= row1->State() ? (1 << 0) : 0;
     sum |= row2->State() ? (1 << 1) : 0;

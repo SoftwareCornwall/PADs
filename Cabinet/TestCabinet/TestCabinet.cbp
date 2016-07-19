@@ -45,6 +45,7 @@
 		<Unit filename="CabinetTests.cpp" />
 		<Unit filename="CodeCheck.cpp" />
 		<Unit filename="CodeCheckTest.cpp" />
+		<Unit filename="HBridgeLockTests.cpp" />
 		<Unit filename="HTTPPostClientSpy.cpp" />
 		<Unit filename="HTTPPostClientSpy.h" />
 		<Unit filename="MatixKeypadTests.cpp" />
