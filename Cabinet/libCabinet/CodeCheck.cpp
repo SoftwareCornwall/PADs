@@ -54,10 +54,9 @@ void CodeCheck::keyPressed(int keyID)
     }
     else if (inputConversion[keyID] == 'E')
     {
-        if (!inputCheck(codeEntered))
-        {
-            codeEntered = "";
-        }
+        inputCheck(codeEntered);
+        codeEntered = "";
+
     }
     else
     {
