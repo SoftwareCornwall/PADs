@@ -74,7 +74,7 @@
 	}
 
 	//Create GetCabinetRecord stored procedure
-	$sql = "CREATE PROCEDURE GetCabinetRecord(IN cabID INT)\n"
+	$sql = "CREATE PROCEDURE GetCabinetRecord(IN cabID VARCHAR(200))\n"
 	."BEGIN\n"
 	."SELECT * FROM tbl_cabinets WHERE id = cabID;\n"
 	."END";
@@ -85,7 +85,7 @@
 	}
 
 	//Create UpdateCabinetDetails stored procedures
-	$sql = "CREATE PROCEDURE `UpdateCabinetDetails`(IN `cabID` INT, IN `NewLocation` VARCHAR(30), IN `NewPostcode` VARCHAR(30)) NOT DETERMINISTIC NO SQL SQL SECURITY DEFINER BEGIN \n"
+	$sql = "CREATE PROCEDURE `UpdateCabinetDetails`(IN `cabID` VARCHAR(200), IN `NewLocation` VARCHAR(30), IN `NewPostcode` VARCHAR(30)) NOT DETERMINISTIC NO SQL SQL SECURITY DEFINER BEGIN \n"
     . "UPDATE tbl_cabinets \n"
     . "SET tbl_cabinets.location = NewLocation, \n"
     . "tbl_cabinets.postcode = NewPostcode \n"
