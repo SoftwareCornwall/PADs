@@ -6,7 +6,7 @@
 class HTTPPostClient
 {
     public:
-        virtual bool sendPostMsg(std::string URL, std::string data) = 0;
+        virtual bool SendPostMsg(std::string URL, std::string data) = 0;
         virtual ~HTTPPostClient(){};
     protected:
     private:

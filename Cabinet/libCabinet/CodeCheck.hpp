@@ -5,7 +5,7 @@
 class CodeCheck
 {
     public:
-        bool inputCheck(std::string inputCode);
+        bool InputCheck(std::string inputCode);
     protected:
     private:
 };

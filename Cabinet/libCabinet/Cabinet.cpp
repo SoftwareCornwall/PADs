@@ -17,7 +17,7 @@ bool Cabinet::DoorEventCallback(bool doorOpen)
 
     if(doorOpen)
     {
-        return postie->sendEventNotification(boxID, "Open", "Available");
+        return postie->SendEventNotification(boxID, "Open", "Available");
     }
     return false;
 

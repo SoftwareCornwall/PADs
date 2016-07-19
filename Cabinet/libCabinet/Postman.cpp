@@ -6,7 +6,7 @@ Postman::Postman(std::string serverAddress, HTTPPostClient *client)
     this->serverAddress = serverAddress;
 }
 
-bool Postman::sendEventNotification(std::string boxID, std::string doorStatus, std::string defibStatus)
+bool Postman::SendEventNotification(std::string boxID, std::string doorStatus, std::string defibStatus)
 {
 
     std::string boxPOSTData = "{\n"
@@ -15,6 +15,6 @@ bool Postman::sendEventNotification(std::string boxID, std::string doorStatus, s
     "  \"defib_status\" : \"" + defibStatus + "\" \n"
     "}";
 
-    return postClient->sendPostMsg(serverAddress, boxPOSTData);
+    return postClient->SendPostMsg(serverAddress, boxPOSTData);
 
 }

@@ -10,12 +10,12 @@ Switch::Switch(InputPin *switchPin, doorCallback doorEventCallback)
     doorCallbackFunction = doorEventCallback;
     pin = switchPin;
     previouslyPressed = false;
-    PressedState = false;
+    pressedState = false;
 }
 
 bool Switch::IsPressed()
 {
-    return PressedState;
+    return pressedState;
 }
 
 void Switch::StateCheck()
@@ -23,7 +23,7 @@ void Switch::StateCheck()
 
     if(pin->State() == false)
     {
-        PressedState = false;
+        pressedState = false;
         previouslyPressed = false;
     }
     else
@@ -31,15 +31,15 @@ void Switch::StateCheck()
 
         if (previouslyPressed == false)
         {
-            firstTime = currentTime();
+            firstTime = CurrentTime();
 
         }
         else
         {
-           if (((currentTime() - firstTime) >= milliseconds(10)) && !PressedState)
+           if (((CurrentTime() - firstTime) >= milliseconds(10)) && !pressedState)
            {
                 doorCallbackFunction(true);
-                PressedState = true;
+                pressedState = true;
            }
         }
         previouslyPressed = true;
