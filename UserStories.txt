@@ -1,4 +1,4 @@
-=====================================================================
+﻿=====================================================================
 As a caller, I want to unlock cabinet so that I can use the defib 
 
 Scenario: Valid code unlocks door
@@ -38,3 +38,108 @@ Given a locked cabinet
 When the correct code is entered 
 Then the first of three text messages is sent to a list of Guardians
 
+=====================================================================
+As a Fleet member I want to be sent a text message if there is a defib alarm so that I can fix the defibs that are broken
+
+* Have at least two minutes of beeping before reporting the alarm
+
+Scenario: Defib has an error
+Given a defib
+When the defib has been beeping for over two minutes
+Then a text message is sent to the Fleet members
+
+Scenario: Other beeping near by
+Given a defib without an alarm
+When a similar beeping is detected for less than two minutes
+Then no text message is sent to the Fleet members
+
+=====================================================================
+As a fleet member I want to be sent a text message if there is a mains power status change so I can investigate this as soon as possible
+
+Assumption: The broadband connection is still up
+
+Scenario: Mains power fails
+Given there is mains power and a backup battery
+When the mains power has not been on for one minute
+Then send a text message to Fleet members
+
+Scenario: Mains power restored
+
+Given there is no mains power
+When mains power is restored for over a minute
+Then send a text message to Fleet members
+
+=====================================================================
+As a 999 caller I want the cabinet to handle power cycling so that I can access the defibrilator during a power failure
+
+Scenario: Mains power fails
+Given there is mains power and a backup battery
+When mains power is lost
+Then unlock the cabinet
+
+Scenario: Mains power is restored
+Given there is no mains power and the cabinet is unlocked
+When mains power is restored
+Then lock the cabinet
+
+=====================================================================
+As a Fleet member I want the tempature in the cabinet to be kept above 5 degrees so that the pads do not freeze
+
+Assuming we have mains power
+
+Scenario: When the temperature approaches five degrees
+Given the heater is off and the tempature is above eight degrees and falling
+When the tempertaure is less than eight degrees
+Then turn on the heater
+
+Scenario: When the temperature hits fifteen degrees
+Given the heater is on and the temperature is below fifteen degrees 
+When the temperature exceeds fifteen degrees
+Then turn off the heater
+
+=====================================================================
+As a Fleet member, I want to be sent a text message if the defibrillator is removed so that I can replace it
+
+Scenario: Defibrillator removed
+Given the cabinet is open and the defibrillator is still inside
+When the defib is removed
+Then send a text to Fleet stating that the defib has been removed
+
+=====================================================================
+As a Fleet member, I want the website's status page to be updated every 15 minutes so that I can see if the defib is in the cabinet
+
+Empty cabinets are highlighted in red on the status page
+
+Scenario: Defib in cabinet
+Given the defib is in the cabinet hanging on its hook
+When the cabinet updates its status every 15 minutes
+Then update the website to show that the defib is in the cabinet as well as a timestamp
+
+Scenario: Defib removed from cabinet
+Given a cabinet with a defib inside
+When the defib is removed
+Then update the website instantly to show that the defib has been removed
+
+Scenario: Cabinet empty
+Given an empty cabinet
+When the cabinet updates its status every 15 minutes
+Update the website to show that the cabinet is still empty as well as a timestamp
+
+Scenario: Defib replaced in cabinet
+Given an empty cabinet
+When the defib is replaced in the cabinet
+Then update the website instantly to show that the defib has been replaced
+
+Scenario: Server has not received an update from a cabinet for 62 minutes
+Given updates previously received
+When 62 minutes have elapsed since last update
+Then update the website to show that the cabinet has not sent an update
+
+=====================================================================
+
+
+[STORY STUBS]
+Notify if less than five degrees
+Log it on the site
+Temperature sensor failure
+Cabinet relocks two minutes after the cabinet is closed
