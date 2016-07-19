@@ -1,4 +1,5 @@
 # PADs across Cornwall
+<<<<<<< HEAD
 
 
 This repo contains the back-end stuff.
@@ -24,6 +25,7 @@ Ensure that you update the username and password variables in both db_create and
 To set up the Apache stuff, I strongly advise you cheat and use XAMPP. Otherwise, you set up apache at your own risk.
 
 To set everything up, follow these commands:
+
 
 sudo apt-get install php5-common libapache2-mod-php5 php5 cli
 
