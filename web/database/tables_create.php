@@ -63,10 +63,10 @@
 
 
 	//Create GetAllCabinetRecords stored procedure 
-	$sql = "CREATE PROCEDURE GetAllCabinetRecords()";
-	$sql += "  BEGIN";
-	$sql += "    SELECT * FROM tbl_cabinets;";
-	$sql += "  END";
+	$sql = "CREATE PROCEDURE GetAllCabinetRecords()\n"
+	."BEGIN\n"
+	."SELECT * FROM tbl_cabinets;\n"
+	."END";
 	if (mysqli_query($conn, $sql)) {
 		echo "<p>Created GetAllCabinetRecords stored procedure successfully.</p>";
 	} else {
@@ -74,10 +74,10 @@
 	}
 
 	//Create GetCabinetRecord stored procedure
-	$sql = "CREATE PROCEDURE GetCabinetRecord(IN cabID INT)";
-	$sql += "  BEGIN";
-	$sql += "    SELECT * FROM tbl_cabinets WHERE id = cabID;";
-	$sql += "  END";
+	$sql = "CREATE PROCEDURE GetCabinetRecord(IN cabID INT)\n"
+	."BEGIN\n"
+	."SELECT * FROM tbl_cabinets WHERE id = cabID;\n"
+	."END";
 	if (mysqli_query($conn, $sql)) {
 		echo "<p>Created GetCabinetRecord stored procedure successfully.</p>";
 	} else {
