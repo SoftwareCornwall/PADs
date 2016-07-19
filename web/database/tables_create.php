@@ -43,7 +43,7 @@
 		first_name VARCHAR(200) NOT NULL,
 		last_name VARCHAR(200) NOT NULL,
 		phone_number VARCHAR(200) NOT NULL,
-		cabinet_id INT NOT NULL
+		cabinet_id VARCHAR(200) NOT NULL
 	)";
 
 	// Create guardians table
@@ -62,7 +62,7 @@
 	}
 
 
-	//Create GetAllCabinetRecords stored procedure 
+	//Create GetAllCabinetRecords stored procedure
 	$sql = "CREATE PROCEDURE GetAllCabinetRecords()\n"
 	."BEGIN\n"
 	."SELECT * FROM tbl_cabinets;\n"
