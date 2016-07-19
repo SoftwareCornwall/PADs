@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+
 <title> Remote Monitoring </title>
 
 </head>
+
 <body>
+<button type="button" onclick="javascript:window.location.href='../../event/abc'">Create new record</button>
+
 <style>
 
 table {
@@ -16,6 +21,8 @@ table {
 	padding: 10px
 }
 
+
+
 thead {
 	background-color:lightgreen;
 }
@@ -24,10 +31,10 @@ thead {
 
 <h1>Fleet PADs</h1>
 <table>
-<thead><tr><td>ID</td><td>Name</td></tr></thead>
+<thead><tr><td>ID</td><td>Location</td><td>Postcode</td></tr></thead>
 <tbody>
 {% for cab in cabinets %}
-    <tr><td>{{ cab.id }}</td><td>{{ cab.name }}</td></tr>
+    <tr><td>{{ cab.id }}</td><td>{{ cab.location }}</td><td>{{cab.postcode}}</td></tr>
 {% else %}
     <tr><td colspan=2>No users have been found.</td></tr>
 {% endfor %}

@@ -65,14 +65,15 @@ $app->get('/event/{id}', function ($request, $response, $args) {
 	$conn= mysqli_connect("localhost", "root", "password", "pads_db")//creates connection!>
 				or die ("Sorry -  could not connect to MySQL");
 
-	$result = mysqli_query($conn, 'SELECT * FROM tbl_cabinet'); //takes everything from tbl_cabinet, assigns to value $query!>
+	$result = mysqli_query($conn, 'SELECT * FROM tbl_cabinets'); //takes everything from tbl_cabinet, assigns to value $query!>
 
 	$tplArray = array(); 
 	while ( $row = mysqli_fetch_array ( $result ) )
 	{
 	    $tplArray[] = array (
 		 'id' => $row ['id'],
-		 'name' => $row ['name'] 
+		 'location' => $row ['location'], 
+		'postcode'=>$row['postcode']//gets fields from 'select *' to pass to html to display + gives data names
 	    );
 	}
 
