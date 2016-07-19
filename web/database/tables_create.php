@@ -22,7 +22,7 @@
 	// Define status table
 	$sql = "CREATE TABLE tbl_status (
 		id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-		cabinet_id INT NOT NULL,
+		cabinet_id VARCHAR(200) NOT NULL,
 		door_status VARCHAR(200) NOT NULL,
 		defib_status VARCHAR(200) NOT NULL,
 		last_update TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
@@ -59,6 +59,42 @@
 	if ($errors_occurred == 1) {
 		echo "<p>One or more of the tables could not be created.</br>";
 		echo "Please ensure that you have created the database first.</p>";
+	}
+
+
+	//Create GetAllCabinetRecords stored procedure 
+	$sql = "CREATE PROCEDURE GetAllCabinetRecords()";
+	$sql += "  BEGIN";
+	$sql += "    SELECT * FROM tbl_cabinets;";
+	$sql += "  END";
+	if (mysqli_query($conn, $sql)) {
+		echo "<p>Created GetAllCabinetRecords stored procedure successfully.</p>";
+	} else {
+		echo "<p>Error creating stored procedure GetAllCabinetRecords: " . mysqli_error($conn) . "</p>";
+	}
+
+	//Create GetCabinetRecord stored procedure
+	$sql = "CREATE PROCEDURE GetCabinetRecord(IN cabID INT)";
+	$sql += "  BEGIN";
+	$sql += "    SELECT * FROM tbl_cabinets WHERE id = cabID;";
+	$sql += "  END";
+	if (mysqli_query($conn, $sql)) {
+		echo "<p>Created GetCabinetRecord stored procedure successfully.</p>";
+	} else {
+		echo "<p>Error creating stored procedure GetCabinetRecord: " . mysqli_error($conn) . "</p>";
+	}
+
+	//Create UpdateCabinetDetails stored procedures
+	$sql = "CREATE PROCEDURE `UpdateCabinetDetails`(IN `cabID` INT, IN `NewLocation` VARCHAR(30), IN `NewPostcode` VARCHAR(30)) NOT DETERMINISTIC NO SQL SQL SECURITY DEFINER BEGIN \n"
+    . "UPDATE tbl_cabinets \n"
+    . "SET tbl_cabinets.location = NewLocation, \n"
+    . "tbl_cabinets.postcode = NewPostcode \n"
+    . "WHERE tbl_cabinets.id = cabID; \n"
+    . "END";
+	if (mysqli_query($conn, $sql)) {
+		echo "<p>Created UpdateCabinetDetails stored procedure successfully.</p>";
+	} else {
+		echo "<p>Error creating stored procedure UpdateCabinetDetails: " . mysqli_error($conn) . "</p>";
 	}
 
 	// Close the connection

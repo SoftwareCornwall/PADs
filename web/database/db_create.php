@@ -21,4 +21,5 @@
   } else {
     echo "<p>Error creating database: " . mysqli_error($conn) . "</p>";
   }
-?>
+
+  
