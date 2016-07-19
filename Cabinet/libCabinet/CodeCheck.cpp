@@ -4,18 +4,18 @@
 
 CodeCheck::CodeCheck()
 {
-    inputConversion[0]='0';
-    inputConversion[1]='1';
-    inputConversion[2]='2';
-    inputConversion[3]='3';
-    inputConversion[4]='4';
-    inputConversion[5]='5';
+    inputConversion[0]='C';
+    inputConversion[1]='9';
+    inputConversion[2]='E';
+    inputConversion[3]='0';
+    inputConversion[4]='5';
+    inputConversion[5]='7';
     inputConversion[6]='6';
-    inputConversion[7]='7';
-    inputConversion[8]='8';
-    inputConversion[9]='9';
-    inputConversion[10]='e';
-    inputConversion[11]='c';
+    inputConversion[7]='8';
+    inputConversion[8]='3';
+    inputConversion[9]='1';
+    inputConversion[10]='4';
+    inputConversion[11]='2';
 
 }
 
@@ -48,11 +48,11 @@ void CodeCheck::SetUnlockCallback (std::function<void()> callback)
 
 void CodeCheck::keyPressed(int keyID)
 {
-    if (codeEntered.length() == maxLength || inputConversion[keyID] == 'c')
+    if (codeEntered.length() == maxLength || inputConversion[keyID] == 'C')
     {
         codeEntered = "";
     }
-    else if (inputConversion[keyID] == 'e')
+    else if (inputConversion[keyID] == 'E')
     {
         if (!inputCheck(codeEntered))
         {

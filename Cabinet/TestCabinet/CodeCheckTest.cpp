@@ -27,11 +27,11 @@ TEST(CodeCheckTests, test_if_key_input_is_valid_1234e)
 {
 
     CodeCheck checker;
-    checker.keyPressed(1);
-    checker.keyPressed(2);
-    checker.keyPressed(3);
-    checker.keyPressed(4);
+    checker.keyPressed(9);
+    checker.keyPressed(11);
+    checker.keyPressed(8);
     checker.keyPressed(10);
+    checker.keyPressed(2);
     EXPECT_EQ("1234", checker.getCodeEntered());
 }
 
@@ -41,7 +41,7 @@ TEST(CodeCheckTests, test_if_key_input_is_valid_12e)//e should reset code if cod
     CodeCheck checker;
     checker.keyPressed(1);
     checker.keyPressed(2);
-    checker.keyPressed(10);
+    checker.keyPressed(2);
     EXPECT_EQ("", checker.getCodeEntered());
 }
 
@@ -51,7 +51,7 @@ TEST(CodeCheckTests, test_if_key_input_is_valid_12c)
     CodeCheck checker;
     checker.keyPressed(1);
     checker.keyPressed(2);
-    checker.keyPressed(11);
+    checker.keyPressed(0);
     EXPECT_EQ("", checker.getCodeEntered());
 }
 TEST(CodeCheckTests, test_if_key_input_is_valid_12c2)
@@ -60,9 +60,9 @@ TEST(CodeCheckTests, test_if_key_input_is_valid_12c2)
     CodeCheck checker;
     checker.keyPressed(1);
     checker.keyPressed(2);
-    checker.keyPressed(11);
-    checker.keyPressed(2);
-    EXPECT_EQ("2", checker.getCodeEntered());
+    checker.keyPressed(0);
+    checker.keyPressed(6);
+    EXPECT_EQ("6", checker.getCodeEntered());
 }
 
 TEST(CodeCheckTests, test_if_key_input_is_invalid_doorPin_false_1233e)
@@ -74,11 +74,11 @@ TEST(CodeCheckTests, test_if_key_input_is_invalid_doorPin_false_1233e)
     {
         unlockCalled = true;
     });
-    checker.keyPressed(1);
+    checker.keyPressed(9);
+    checker.keyPressed(11);
+    checker.keyPressed(8);
+    checker.keyPressed(6);
     checker.keyPressed(2);
-    checker.keyPressed(3);
-    checker.keyPressed(3);
-    checker.keyPressed(10);
     EXPECT_FALSE(unlockCalled) << "unlock Callback was called when it wasn't expected";
 }
 
@@ -93,11 +93,11 @@ TEST(CodeCheckTests, test_if_key_input_is_valid_doorPin_true_1234e)
         unlockCalled = true;
     });
 
-    checker.keyPressed(1);
-    checker.keyPressed(2);
-    checker.keyPressed(3);
-    checker.keyPressed(4);
+    checker.keyPressed(9);
+    checker.keyPressed(11);
+    checker.keyPressed(8);
     checker.keyPressed(10);
+    checker.keyPressed(2);
     EXPECT_TRUE(unlockCalled) << "unlock Callback wasn't called";
 }
 

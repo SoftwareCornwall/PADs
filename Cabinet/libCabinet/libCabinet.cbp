@@ -61,6 +61,8 @@
 		<Unit filename="Switch.hpp" />
 		<Unit filename="WiringPiPin.cpp" />
 		<Unit filename="WiringPiPin.hpp" />
+		<Unit filename="include/Initialise.h" />
+		<Unit filename="src/Initialise.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />
