@@ -38,8 +38,12 @@ void Switch::StateCheck()
         {
            if ((currentTime() - firstTime) >= milliseconds(10))
            {
+                if(!PressedState)
+                {
+                    doorCallbackFunction(true);
+                }
                 PressedState = true;
-                doorCallbackFunction(true);
+
            }
         }
         previouslyPressed = true;

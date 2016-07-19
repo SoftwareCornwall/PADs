@@ -35,7 +35,6 @@ int main()
     WiringPiPin doorPin{0};
     Switch doorSwitch{&doorPin, doorEventCallback};
 
-
     while(true){
 
         doorSwitch.Service();
@@ -48,4 +47,5 @@ int main()
     }
 
     return 0;
+
 }
