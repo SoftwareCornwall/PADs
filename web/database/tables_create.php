@@ -5,7 +5,7 @@
 
 	// Define cabinets table
 	$sql = "CREATE TABLE tbl_cabinets (
-		id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+		id VARCHAR(200) NOT NULL PRIMARY KEY,
 		location VARCHAR(200) NOT NULL,
 		postcode VARCHAR(200) NOT NULL
 	)";
