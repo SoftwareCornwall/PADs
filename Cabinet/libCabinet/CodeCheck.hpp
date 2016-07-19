@@ -4,21 +4,22 @@
 #include <map>
 #include <iostream>
 #include "OutputPin.hpp"
+#include <functional>
 
 class CodeCheck
 {
     public:
-        CodeCheck(OutputPin *OutputPin);
+        CodeCheck();
         bool inputCheck(std::string inputCode);
         void keyPressed(int keyID);
-        bool getPinState();
         std::string getCodeEntered();
+        void SetUnlockCallback (std::function<void()> callback);
     protected:
     private:
         std::string codeEntered = "";
         const int maxLength = 20;
         std::map<int,char> inputConversion;
-        OutputPin *doorOutputPin;
+        std::function<void()> unlockCallback;
 
 
 };

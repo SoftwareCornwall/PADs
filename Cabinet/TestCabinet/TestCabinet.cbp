@@ -15,6 +15,7 @@
 					<Add option="-std=c++11" />
 					<Add option="-g" />
 					<Add directory="../libCabinet" />
+					<Add directory="include" />
 				</Compiler>
 				<Linker>
 					<Add library="gtest" />
@@ -32,6 +33,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add directory="include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -52,6 +54,8 @@
 		<Unit filename="POSTTests.cpp" />
 		<Unit filename="SwitchTests.cpp" />
 		<Unit filename="TestPin.hpp" />
+		<Unit filename="include/TestOutputPin.h" />
+		<Unit filename="src/TestOutputPin.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />
