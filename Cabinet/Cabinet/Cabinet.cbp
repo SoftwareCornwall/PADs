@@ -23,6 +23,10 @@
 					<Add library="wiringPi" />
 					<Add directory="../libCabinet/bin/Debug" />
 				</Linker>
+				<ExtraCommands>
+					<Add after="chmod +x PostBuildSteps.sh" />
+					<Add after="./PostBuildSteps.sh" />
+				</ExtraCommands>
 			</Target>
 			<Target title="Release">
 				<Option output="bin/Release/Cabinet" prefix_auto="1" extension_auto="1" />
@@ -42,6 +46,7 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="PostBuildSteps.sh" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />

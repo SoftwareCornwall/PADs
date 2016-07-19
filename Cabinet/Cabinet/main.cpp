@@ -22,7 +22,7 @@ int main()
     wiringPiSetup();
 
     std::string boxID = "1111R";
-    std::string URL = "http://servertobedecided.invalid/events";
+    std::string URL = "http://192.168.0.110/events/";
 
     LibCurlPostClient client = LibCurlPostClient();
     Postman pat(URL, &client);
@@ -32,9 +32,8 @@ int main()
 
     auto doorEventCallback = std::bind(&Cabinet::DoorEventCallback, &cabinet, _1);
 
-    WiringPiPin doorPin{0};
+    WiringPiPin doorPin{2};
     Switch doorSwitch{&doorPin, doorEventCallback};
-
 
     while(true){
 
@@ -48,4 +47,5 @@ int main()
     }
 
     return 0;
+
 }
