@@ -1,6 +1,4 @@
 # PADs across Cornwall
-<<<<<<< HEAD
-
 
 This repo contains the back-end stuff.
 
