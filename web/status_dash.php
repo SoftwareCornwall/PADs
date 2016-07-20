@@ -93,4 +93,4 @@ $app->get('/bye/{name}', function($request, $response, $args) {
 	return $response->write("Bye ".$args['name']);
 });
 
-?>
+
