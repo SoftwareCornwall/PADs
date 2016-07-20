@@ -1,31 +1,54 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+<title> Remote Monitoring </title>
+
+</head>
+
+<!--<body>
+<button type="button" onclick="javascript:window.location.href='../../templates/sample_form.html'">Create new record</button>
+-->
+<button type="button" onclick="window.location.reload(true);">Update</button>
 <style>
 
 table {
+	width: 100%;
 	color:black;
 	background-color:white;
-	margin: 50px auto;
+	margin: 1px auto;
+	border: 10px solid black
+	padding: 10px
 }
 
+thead {
+	background-color:lightgreen;
+}
 
+.door_error {
+background-color:red;
+}
+.door_warning{
+background-color:orange;
+}
 </style>
 
-<title>Fleet PADs</title>
-</head>
-<body>
-<h1>{{id}}</h1>
-<table border="1">
-<tr>
-<th>ID</th>
-<th>Name</th>
-<th>Status</th>
-</tr>
+<h1>Fleet PADs</h1>
+<table>
+<thead><tr><th>ID</th><th>Location</th><th>Postcode</th><th>Door Status</th><th>Defib Status</th></tr></thead>
+<tbody>
+{% for cab in cabinets %}
 
-<tr><td>AAC-207</td><td>Longwell</td><td>Low battery</td></tr>
-<tr><td>AAC-574</td><td>St Enodoc Hotel</td><td>Online</td></tr>
-<tr><td>AAC-576</td><td>Emersons Green</td><td> Online</td></tr>
+{% if cab.door_status == "Not available" %}
+	<tr  class="door_error"><td>{{ cab.id }}</td><td>{{ cab.location }}</td><td>{{cab.postcode}}</td><td><i>{{cab.door_status}}</i></td><td>{{cab.defib_status}}</td></tr>
+{% elseif cab.door_status == "Open" %}
+	<tr  class="door_warning"><td>{{ cab.id }}</td><td>{{ cab.location }}</td><td>{{cab.postcode}}</td><td><i>{{cab.door_status}}</i></td><td>{{cab.defib_status}}</td></tr>
+{% else %}
+<tr><td>{{ cab.id }}</td><td>{{ cab.location }}</td><td>{{cab.postcode}}</td><td>{{cab.door_status}}</td><td>{{cab.defib_status}}</td></tr>
+{% endif %}
+
+{% endfor %}
+</tbody>
 </table>
 </body>
 </html>
