@@ -61,6 +61,8 @@
 		<Unit filename="Switch.hpp" />
 		<Unit filename="WiringPiPin.cpp" />
 		<Unit filename="WiringPiPin.hpp" />
+		<Unit filename="include/Thermometer.h" />
+		<Unit filename="src/Thermometer.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />

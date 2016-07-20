@@ -54,11 +54,13 @@
 		<Unit filename="MatrixKeypadPinsFake.cpp" />
 		<Unit filename="MatrixKeypadPinsFake.hpp" />
 		<Unit filename="MatrixKeypadReaderTests.cpp" />
+		<Unit filename="OutputPinSpy.hpp" />
 		<Unit filename="POSTTests.cpp" />
 		<Unit filename="SwitchTests.cpp" />
 		<Unit filename="TestPin.hpp" />
 		<Unit filename="TestTime.cpp" />
 		<Unit filename="TestTime.hpp" />
+		<Unit filename="ThermometerTest.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />
