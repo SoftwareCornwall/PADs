@@ -1,19 +1,13 @@
 <?php
-use PHPUnit/Framework/TestCase;
-include ('../webtest.php');
 
-// Test MySQL CRUD outputs
-class DBTest extends TestCase
+
+class HikerTest extends PHPUnit_Framework_TestCase
 {
-    //Assert that cabinet door status update executes and has saved the correct value
-    public function test1()
+    public function testLife_the_universe_and_everything()
     {
-        // Assert
-        $this->assertEquals("test", testFunction());
-
+        $this->assertEquals(42, 42);
     }
-
-    //Assert that cabinet status beep update executes and has saved the correct value
-
-
 }
+
+?>
+
