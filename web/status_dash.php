@@ -2,10 +2,10 @@
 
 use \Psr\Http\Message\ServerRequestInterface as Request;//shortens path to 'request'
 use \Psr\Http\Message\ResponseInterface as Response;//^^to 'Response'
-require 'vendor/autoload.php';
+require '../vendor/autoload.php';
 $app = new \Slim\App(); 
 
-$app->post('/event', function ($request, $response, $args) {
+$app->post('/status', function ($request, $response, $args) {
 	$data = $request->getParsedBody(); //creates array from data posted by user
 	return $response->write($data["id"]);
 });
@@ -30,16 +30,18 @@ $servername = "localhost";
 $username = "root";
 $password = "password";
 $dbName = "pads_db";
-$portNumber = "3306";
 
 // Create aconnection using these variables
-$conn = mysqli_connect($servername, $username, $password, $dbName, $portNumber);
+$conn = mysqli_connect($servername, $username, $password, $dbName);
 
 // Check that the connection was successful
 if (!$conn) {
 	// If the connection was not successful, echo a connection error and stop the PHP scripts
 	die("Connection failed: " . mysqli_connect_error());
 }
+
+
+$query = mysqli_query($conn, 'SELECT * FROM tbl_status');
 
 
 //Register component on container
@@ -58,41 +60,37 @@ $container['view'] = function ($container) {
 };
 
 // Render Twig template in route
-$app->get('/event/{id}', function ($request, $response, $args) {
+$app->get('/status/{id}', function ($request, $response, $args) {
 
-	$conn= mysqli_connect("localhost", "root", "password", "pads_db", "3306")//creates connection!>
+	$conn= mysqli_connect("localhost", "root", "password", "pads_db")//creates connection!>
 				or die ("Sorry -  could not connect to MySQL");
-	
-$query = "SELECT cabs.id, cabs.location, cabs.postcode, 
-COALESCE(
-   (SELECT stats.door_status 
-    FROM tbl_status stats 
-    WHERE stats.cabinet_id = cabs.id ORDER BY stats.last_update DESC LIMIT 1) , 'Not available') door_status, 
-COALESCE(
-   (SELECT stats.defib_status 
-    FROM tbl_status stats 
-    WHERE stats.cabinet_id = cabs.id ORDER BY stats.last_update DESC LIMIT 1) , 'Not available') defib_status
-FROM tbl_cabinets cabs 
-ORDER BY cabs.id ASC";
 
-	$result = mysqli_query($conn, $query); //takes everything from tbl_cabinet, assigns to value $query!>
+	$result = mysqli_query($conn, 'SELECT * FROM tbl_status'); //takes everything from tbl_cabinet, assigns to value $query!>
 
 	$tplArray = array(); 
 	while ( $row = mysqli_fetch_array ( $result ) )
 	{
 	    $tplArray[] = array (
-		 'id' => $row ['id'],
-		 'location' => $row ['location'], 
-		'postcode'=>$row['postcode'],//gets fields from 'select *' to pass to html to display + gives data names
-		'door_status'=>$row['door_status'],
-		'defib_status'=>$row['defib_status']
+		 'cabinet_id' => $row ['cabinet_id'],
+		 'door_status' => $row ['door_status'], 
+		'defib_status'=>$row['defib_status'],//gets fields from 'select *' to pass to html to display + gives data names
+		'last_update'=>$row['last_update']
 	    );
 	}
 
 
-    return $this->view->render($response, 'sample.html', //calls sample.html
+    return $this->view->render($response, '/templates/status.html', //calls sample.html
         array('cabinets' => $tplArray)); //   'id' => $args['id'] ]);
 });
 
 $app->run();
+
+$app->get('/hello/{name}', function($request, $response, $args) {
+	return $response->write("Hello ".$args['name']);
+});
+
+$app->get('/bye/{name}', function($request, $response, $args) {
+	return $response->write("Bye ".$args['name']);
+});
+
 ?>
