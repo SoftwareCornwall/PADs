@@ -11,5 +11,12 @@
 		<Project filename="HardwareDemo/HardwareDemo.cbp">
 			<Depends filename="libCabinet/libCabinet.cbp" />
 		</Project>
+		<Project filename="BeepDetector/BeepDetector.cbp">
+			<Depends filename="libBeepDetector/libBeepDetector.cbp" />
+		</Project>
+		<Project filename="TestBeepDetector/TestBeepDetector.cbp">
+			<Depends filename="libBeepDetector/libBeepDetector.cbp" />
+		</Project>
+		<Project filename="libBeepDetector/libBeepDetector.cbp" />
 	</Workspace>
 </CodeBlocks_workspace_file>
