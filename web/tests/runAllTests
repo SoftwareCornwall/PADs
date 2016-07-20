@@ -1,0 +1,8 @@
+#!/bin/bash
+
+phpunit --verbose --log-junit server-test.xml .  
+
+#echo \#\#teamcity[importData type=\'gtest\' path=\'`pwd`/cabinet-tests.xml\']  -- Byrans example
+
+echo \#\#teamcity[importData type=\'junit\' path=\'`pwd`/server-test.xml\']
+
