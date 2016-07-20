@@ -32,7 +32,7 @@ public:
 
 };
 
-TEST_F(HangerTests, Cabinet_sends_event_after_hanger_weight_release_event)
+TEST_F(HangerTests, Cabinet_sends_event_on_hanger_down)
 {
 
     //setDoorSwitchState(false);
@@ -41,6 +41,19 @@ TEST_F(HangerTests, Cabinet_sends_event_after_hanger_weight_release_event)
 
     cabinet.HangerEventCallback(true);
     ASSERT_TRUE(cabinet.IsSubstringPresentInOutputString("  \"hanger_status\" : \"Down\" \n", client.lastPOSTData));
+    ASSERT_EQ(URL, client.lastPOSTURL);
+
+}
+
+TEST_F(HangerTests, Cabinet_sends_event_on_hanger_up)
+{
+
+    //setDoorSwitchState(false);
+
+    client.sendPostMsgResult = true;
+
+    cabinet.HangerEventCallback(false);
+    ASSERT_TRUE(cabinet.IsSubstringPresentInOutputString("  \"hanger_status\" : \"Up\" \n", client.lastPOSTData));
     ASSERT_EQ(URL, client.lastPOSTURL);
 
 }

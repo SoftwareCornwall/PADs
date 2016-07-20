@@ -31,6 +31,10 @@ bool Cabinet::HangerEventCallback(bool hangerDown)
     {
         return postie->sendEventNotification(boxID, "Open", "Down");
     }
+    else
+    {
+        return postie->sendEventNotification(boxID, "Open", "Up");
+    }
     return false;
 
 }
