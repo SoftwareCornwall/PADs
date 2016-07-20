@@ -61,7 +61,7 @@ $app->get('/event/{id}', function ($request, $response, $args) {
 	$conn= mysqli_connect("localhost", "root", "password", "pads_db", "3306")//creates connection!>
 				or die ("Sorry -  could not connect to MySQL");
 	
-$query = "SELECT cabs.id, cabs.location, cabs.postcode, 
+$query = "SELECT cabs.id, cabs.location, cabs.postcode, SUBTIME(CURRENT_TIMESTAMP(),'1:02:00') cut_off_time,
 COALESCE(
    (SELECT stats.door_status 
     FROM tbl_status stats 
@@ -69,7 +69,11 @@ COALESCE(
 COALESCE(
    (SELECT stats.defib_status 
     FROM tbl_status stats 
-    WHERE stats.cabinet_id = cabs.id ORDER BY stats.last_update DESC LIMIT 1) , 'Not available') defib_status
+    WHERE stats.cabinet_id = cabs.id ORDER BY stats.last_update DESC LIMIT 1) , 'Not available') defib_status,
+COALESCE(
+   (SELECT stats.last_update 
+    FROM tbl_status stats 
+    WHERE stats.cabinet_id = cabs.id ORDER BY stats.last_update DESC LIMIT 1) , 'Not available') last_update
 FROM tbl_cabinets cabs 
 ORDER BY cabs.id ASC";
 
@@ -78,15 +82,16 @@ ORDER BY cabs.id ASC";
 	$tplArray = array(); 
 	while ( $row = mysqli_fetch_array ( $result ) )
 	{
-	    $tplArray[] = array (
+		    $tplArray[] = array (
 		 'id' => $row ['id'],
 		 'location' => $row ['location'], 
 		'postcode'=>$row['postcode'],//gets fields from 'select *' to pass to html to display + gives data names
 		'door_status'=>$row['door_status'],
-		'defib_status'=>$row['defib_status']
-	    );
+		'defib_status'=>$row['defib_status'],
+		'last_update'=>$row['last_update'],
+		'cut_off_time'=>$row['cut_off_time']
+	 );
 	}
-
 
     return $this->view->render($response, 'sample.html', //calls sample.html
         array('cabinets' => $tplArray)); //   'id' => $args['id'] ]);
