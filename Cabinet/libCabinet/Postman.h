@@ -9,7 +9,7 @@ class Postman
 {
     public:
         Postman(std::string serverAddress, HTTPPostClient *client);
-        bool sendEventNotification(std::string boxID, std::string doorStatus, std::string defibStatus);
+        bool sendEventNotification(std::string boxID, std::string doorStatus, std::string hangerStatus);
     protected:
     private:
         std::string serverAddress;

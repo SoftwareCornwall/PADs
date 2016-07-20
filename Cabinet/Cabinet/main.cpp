@@ -39,6 +39,14 @@ int main()
     WiringPiPin doorPin{2};
     Switch doorSwitch{&doorPin, doorEventCallback};
 
+    /**** hanger switch ****/
+
+    auto hangerEventCallback = std::bind(&Cabinet::HangerEventCallback, &cabinet, _1);
+
+    WiringPiPin hangerPin{3};
+    Switch hangerSwitch{&hangerPin, hangerEventCallback};
+
+
     /**** H-Bridge Lock ****/
     WiringPiPin lockOpen{0};
     WiringPiPin lockClose{7};
@@ -89,6 +97,8 @@ int main()
         lock.Service();
 
         doorSwitch.Service();
+
+        hangerSwitch.Service();
 
         /* Limit how fast ServiceIter is run, otherwise will deplete the
             battery quicker than it should. */

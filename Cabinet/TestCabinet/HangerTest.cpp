@@ -14,7 +14,7 @@
 using namespace ::testing;
 using namespace ::std::chrono;
 
-class CabinetTests : public Test
+class HangerTests : public Test
 {
 public:
 
@@ -24,7 +24,7 @@ public:
     Postman postie;
     Cabinet cabinet;
 
-    CabinetTests() : client(),
+    HangerTests() : client(),
                      postie(URL, &client),
                      cabinet(&postie, boxID)
     {
@@ -32,16 +32,15 @@ public:
 
 };
 
-TEST_F(CabinetTests, Cabinet_sends_event_after_door_open_event)
+TEST_F(HangerTests, Cabinet_sends_event_after_hanger_weight_release_event)
 {
 
     //setDoorSwitchState(false);
 
     client.sendPostMsgResult = true;
 
-    cabinet.DoorEventCallback(true);
-    ASSERT_TRUE(cabinet.IsSubstringPresentInOutputString("  \"door_status\" : \"Open\", \n", client.lastPOSTData));
+    cabinet.HangerEventCallback(true);
+    ASSERT_TRUE(cabinet.IsSubstringPresentInOutputString("  \"hanger_status\" : \"Down\" \n", client.lastPOSTData));
     ASSERT_EQ(URL, client.lastPOSTURL);
 
 }
-

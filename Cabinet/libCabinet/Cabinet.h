@@ -10,6 +10,8 @@ class Cabinet
         Cabinet(Postman *postie, std::string boxID);
         virtual ~Cabinet();
         bool DoorEventCallback(bool doorOpen);
+        bool HangerEventCallback(bool hangerDown);
+        bool IsSubstringPresentInOutputString(std::string subStr, std::string outputStr);
     protected:
     private:
         Postman *postie;
