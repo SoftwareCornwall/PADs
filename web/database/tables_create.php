@@ -11,7 +11,7 @@
 	)";
 
 	// Create cabinets table
-	if ($conn->multi_query($sql) === TRUE) {
+	if ($conn->query($sql) === TRUE) {
 		echo "<p>Cabinets table created successfully.</p>";
 	} else {
 		echo "<p>Cabinets table creation failed.</br>";
@@ -31,7 +31,7 @@
 	)";
 
 	// Create status table
-	if ($conn->multi_query($sql) === TRUE) {
+	if ($conn->query($sql) === TRUE) {
 		echo "<p>Status table created successfully.</p>";
 	} else {
 		echo "<p>Status table creation failed.</br>";
@@ -51,7 +51,7 @@
 	)";
 
 	// Create guardians table
-	if ($conn->multi_query($sql) === TRUE) {
+	if ($conn->query($sql) === TRUE) {
 		echo "<p>Guardians table created successfully.</p>";
 	} else {
 		echo "<p>Guardians table creation failed.</br>";
