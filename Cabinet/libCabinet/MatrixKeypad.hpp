@@ -9,7 +9,7 @@ class MatrixKeypad
 {
 public:
     using key_pressed_callback_t = std::function<void(int)>;
-    using time_point_t = decltype(currentTime());
+    using time_point_t = decltype(CurrentTime());
 
     static const size_t numberOfKeys{12};
 private:

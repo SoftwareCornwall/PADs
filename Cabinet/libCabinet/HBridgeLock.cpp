@@ -38,11 +38,11 @@ void RunRequest(bool &requested, bool &inProgress,
     {
         requested = false;
         inProgress = true;
-        startTime = currentTime();
+        startTime = CurrentTime();
         pin->State(true);
     }
 
-    if(inProgress && (currentTime() - startTime) >= milliseconds(500))
+    if(inProgress && (CurrentTime() - startTime) >= milliseconds(500))
     {
         inProgress = false;
         pin->State(false);

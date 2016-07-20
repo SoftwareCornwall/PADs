@@ -6,7 +6,7 @@
 class LibCurlPostClient : public HTTPPostClient
 {
     public:
-        bool sendPostMsg(std::string URL, std::string data);
+        bool SendPostMsg(std::string URL, std::string data);
     protected:
     private:
         CURL *curl;

@@ -19,10 +19,10 @@ CodeCheck::CodeCheck()
 
 }
 
-bool CodeCheck::inputCheck(std::string inputCode)
+bool CodeCheck::InputCheck(std::string inputCode)
 {
-std::string correctCode = "1234";
-if((inputCode == correctCode))
+    std::string correctCode = "1234";
+    if((inputCode == correctCode))
     {
 
         if(unlockCallback)
@@ -54,7 +54,7 @@ void CodeCheck::keyPressed(int keyID)
     }
     else if (inputConversion[keyID] == 'E')
     {
-        if (!inputCheck(codeEntered))
+        if (!InputCheck(codeEntered))
         {
             codeEntered = "";
         }

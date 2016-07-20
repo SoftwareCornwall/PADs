@@ -16,7 +16,7 @@
 #define SERVICE_SLEEP_TIME_MILLISECONDS 1
 
 using namespace std;
-chrono::high_resolution_clock::time_point currentTime()
+chrono::high_resolution_clock::time_point CurrentTime()
 {
     return chrono::high_resolution_clock::now();
 }

@@ -18,7 +18,7 @@ void MatrixKeypad::SetKeyPressedCallback(key_pressed_callback_t callback)
 void MatrixKeypad::Service()
 {
     uint16_t states = reader->Read();
-    time_point_t now = currentTime();
+    time_point_t now = CurrentTime();
 
     for(size_t key = 0; key < numberOfKeys; key++)
     {

@@ -10,7 +10,7 @@ class CodeCheck
 {
     public:
         CodeCheck();
-        bool inputCheck(std::string inputCode);
+        bool InputCheck(std::string inputCode);
         void keyPressed(int keyID);
         std::string getCodeEntered();
         void SetUnlockCallback (std::function<void()> callback);

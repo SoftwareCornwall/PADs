@@ -7,7 +7,7 @@
 class HBridgeLock
 {
 public:
-    using current_time_point_t = decltype(currentTime());
+    using current_time_point_t = decltype(CurrentTime());
 private:
     OutputPin *openPin;
     OutputPin *closePin;

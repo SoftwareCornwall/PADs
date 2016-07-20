@@ -17,7 +17,7 @@ public:
     void Service();
 private:
     InputPin *pin;
-    bool PressedState;
+    bool pressedState;
     bool previouslyPressed;
     std::chrono::high_resolution_clock::time_point firstTime;
     doorCallback doorCallbackFunction;

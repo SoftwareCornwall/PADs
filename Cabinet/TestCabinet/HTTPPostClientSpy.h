@@ -7,7 +7,7 @@
 class HTTPPostClientSpy : public HTTPPostClient
 {
     public:
-        bool sendPostMsg(std::string URL, std::string data);
+        bool SendPostMsg(std::string URL, std::string data);
         bool sendPostMsgResult = false;
         std::string lastPOSTURL;
         std::string lastPOSTData;

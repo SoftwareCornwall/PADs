@@ -3,7 +3,7 @@ using namespace ::std::chrono;
 
 high_resolution_clock::time_point fakeTime;
 
-high_resolution_clock::time_point currentTime()
+high_resolution_clock::time_point CurrentTime()
 {
     return fakeTime;
 }
