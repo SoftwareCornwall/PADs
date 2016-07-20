@@ -22,7 +22,7 @@ if(!empty($data['cabinet_id']) && !empty($data['door_status']) && !empty($data['
 
   // If the door is open, send the SMS message
   if ($door_status == "Open") {
-    include 'send_sms.php';
+    include 'door_open.php';
   }
 } else {
     echo "No JSON post data.";
