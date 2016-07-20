@@ -11,7 +11,7 @@
 	)";
 
 	// Create cabinets table
-	if ($conn->multi_query($sql) === TRUE) {
+	if ($conn->query($sql) === TRUE) {
 		echo "<p>Cabinets table created successfully.</p>";
 	} else {
 		echo "<p>Cabinets table creation failed.</br>";
@@ -21,15 +21,17 @@
 
 	// Define status table
 	$sql = "CREATE TABLE tbl_status (
-		id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+		id INT NOT NULL AUTO_INCREMENT,
 		cabinet_id VARCHAR(200) NOT NULL,
 		door_status VARCHAR(200) NOT NULL,
 		defib_status VARCHAR(200) NOT NULL,
-		last_update TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+		last_update TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+		PRIMARY KEY (id),
+		FOREIGN KEY (cabinet_id) REFERENCES tbl_cabinets(id)
 	)";
 
 	// Create status table
-	if ($conn->multi_query($sql) === TRUE) {
+	if ($conn->query($sql) === TRUE) {
 		echo "<p>Status table created successfully.</p>";
 	} else {
 		echo "<p>Status table creation failed.</br>";
@@ -39,15 +41,17 @@
 
 	// Define guardians table
 	$sql = "CREATE TABLE tbl_guardians (
-		id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+		id INT NOT NULL AUTO_INCREMENT,
+		cabinet_id VARCHAR(200) NOT NULL,
 		first_name VARCHAR(200) NOT NULL,
 		last_name VARCHAR(200) NOT NULL,
 		phone_number VARCHAR(200) NOT NULL,
-		cabinet_id VARCHAR(200) NOT NULL
+		PRIMARY KEY (id),
+		FOREIGN KEY (cabinet_id) REFERENCES tbl_cabinets(id)
 	)";
 
 	// Create guardians table
-	if ($conn->multi_query($sql) === TRUE) {
+	if ($conn->query($sql) === TRUE) {
 		echo "<p>Guardians table created successfully.</p>";
 	} else {
 		echo "<p>Guardians table creation failed.</br>";
@@ -99,4 +103,3 @@
 
 	// Close the connection
 	$conn->close();
-
