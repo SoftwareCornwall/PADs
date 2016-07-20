@@ -20,8 +20,6 @@ $config['db']['dbname'] = "pads_db";//login to database
 
 $app = new \Slim\App(["settings" => $config]);
 
-
-
 // Get container
 $container = $app->getContainer();
 

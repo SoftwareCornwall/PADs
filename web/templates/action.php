@@ -21,6 +21,8 @@ $sql = "";
 	VALUES ('".$_POST["pad_id"]."','".$_POST["pad_l"].",'".$_POST["pad_post"]."');";
 	//echo "$sql";
 	
+	$sql .= "INSERT INTO tbl_status (id, location, postcode)
+	VALUES ('".$_POST["pad_id"]."','".$_POST["pad_l"].",'".$_POST["pad_post"]."');";
 
 	// Check if it was successful
 	if ($res=mysqli_multi_query($conn, $sql)) {

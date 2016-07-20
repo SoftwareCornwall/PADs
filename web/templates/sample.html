@@ -6,8 +6,9 @@
 
 </head>
 
-<body>
+<!--<body>
 <button type="button" onclick="javascript:window.location.href='../../templates/sample_form.html'">Create new record</button>
+-->
 <button type="button" onclick="window.location.reload(true);">Update</button>
 <style>
 
@@ -24,6 +25,12 @@ thead {
 	background-color:lightgreen;
 }
 
+.door_error {
+background-color:red;
+}
+.door_warning{
+background-color:orange;
+}
 </style>
 
 <h1>Fleet PADs</h1>
@@ -31,9 +38,15 @@ thead {
 <thead><tr><th>ID</th><th>Location</th><th>Postcode</th><th>Door Status</th><th>Defib Status</th></tr></thead>
 <tbody>
 {% for cab in cabinets %}
-    <tr><td>{{ cab.id }}</td><td>{{ cab.location }}</td><td>{{cab.postcode}}</td><td>{{cab.door_status}}</td><td>{{cab.defib_status}}</td></tr>
+
+{% if cab.door_status == "Not available" %}
+	<tr  class="door_error"><td>{{ cab.id }}</td><td>{{ cab.location }}</td><td>{{cab.postcode}}</td><td><i>{{cab.door_status}}</i></td><td>{{cab.defib_status}}</td></tr>
+{% elseif cab.door_status == "Open" %}
+	<tr  class="door_warning"><td>{{ cab.id }}</td><td>{{ cab.location }}</td><td>{{cab.postcode}}</td><td><i>{{cab.door_status}}</i></td><td>{{cab.defib_status}}</td></tr>
 {% else %}
-    <tr><td colspan=2>No users have been found.</td></tr>
+<tr><td>{{ cab.id }}</td><td>{{ cab.location }}</td><td>{{cab.postcode}}</td><td>{{cab.door_status}}</td><td>{{cab.defib_status}}</td></tr>
+{% endif %}
+
 {% endfor %}
 </tbody>
 </table>
