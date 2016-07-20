@@ -13,7 +13,7 @@ $app->post('/event', function ($request, $response, $args) {
 $config['displayErrorDetails'] = true;
 $config['addContentLengthHeader'] = false;
 
-$config['db']['host']   = "192.168.0.110";
+$config['db']['host']   = "localhost";
 $config['db']['user']   = "root";
 $config['db']['pass']   = "password";
 $config['db']['dbname'] = "pads_db";//login to database
@@ -26,21 +26,20 @@ $app = new \Slim\App(["settings" => $config]);
 $container = $app->getContainer();
 
 // Assign variables holding the server details required to connect
-$servername = "192.168.0.110";
+$servername = "localhost";
 $username = "root";
 $password = "password";
 $dbName = "pads_db";
+$portNumber = "3306";
 
 // Create aconnection using these variables
-$conn = mysqli_connect($servername, $username, $password, $dbName);
+$conn = mysqli_connect($servername, $username, $password, $dbName, $portNumber);
 
 // Check that the connection was successful
 if (!$conn) {
 	// If the connection was not successful, echo a connection error and stop the PHP scripts
 	die("Connection failed: " . mysqli_connect_error());
 }
-
-
 
 
 //Register component on container
@@ -61,7 +60,7 @@ $container['view'] = function ($container) {
 // Render Twig template in route
 $app->get('/event/{id}', function ($request, $response, $args) {
 
-	$conn= mysqli_connect("192.168.0.110", "root", "password", "pads_db")//creates connection!>
+	$conn= mysqli_connect("localhost", "root", "password", "pads_db", "3306")//creates connection!>
 				or die ("Sorry -  could not connect to MySQL");
 	
 $query = "SELECT cabs.id, cabs.location, cabs.postcode, 
@@ -96,13 +95,4 @@ ORDER BY cabs.id ASC";
 });
 
 $app->run();
-
-$app->get('/hello/{name}', function($request, $response, $args) {
-	return $response->write("Hello ".$args['name']);
-});
-
-$app->get('/bye/{name}', function($request, $response, $args) {
-	return $response->write("Bye ".$args['name']);
-});
-
 ?>
