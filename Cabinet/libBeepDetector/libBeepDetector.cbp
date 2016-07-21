@@ -14,8 +14,10 @@
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
 				<Compiler>
+					<Add option="-std=c++11" />
 					<Add option="-Wall" />
 					<Add option="-g" />
+					<Add directory="../libBeepDetector" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -28,15 +30,16 @@
 				<Compiler>
 					<Add option="-Wall" />
 					<Add option="-O2" />
+					<Add directory="../libBeepDetector" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
 				</Linker>
 			</Target>
 		</Build>
-		<Unit filename="main.c">
-			<Option compilerVar="CC" />
-		</Unit>
+		<Unit filename="AlsaMicrophoneInput.cpp" />
+		<Unit filename="AlsaMicrophoneInput.h" />
+		<Unit filename="MicrophoneInput.h" />
 		<Extensions>
 			<envvars />
 			<code_completion />

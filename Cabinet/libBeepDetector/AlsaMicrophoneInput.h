@@ -6,11 +6,13 @@
 #include <alsa/asoundlib.h>
 #include <string>
 
-class AlsaMicrophoneInput
+#include "MicrophoneInput.h"
+
+class AlsaMicrophoneInput : public MicrophoneInput
 {
     public:
-        AlsaMicrophoneInput(std::string AlsaAudioDevice, int buffer_frames, unsigned int rate, unsigned int channels, unsigned long period_size, int *alsaErrorCode);
-        virtual ~AlsaMicrophoneInput();
+        int SetupAudioDevice(std::string AlsaAudioDevice, int buffer_frames, unsigned int rate, unsigned int channels, unsigned long period_size);
+        ~AlsaMicrophoneInput();
         char* GetFrames(int numberOfFrames, int *alsaErrorCode);
     protected:
     private:

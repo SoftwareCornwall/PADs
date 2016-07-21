@@ -12,8 +12,15 @@
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
+					<Add option="-std=c++11" />
 					<Add option="-g" />
+					<Add directory="../libBeepDetector" />
 				</Compiler>
+				<Linker>
+					<Add library="BeepDetector" />
+					<Add library="asound" />
+					<Add directory="../libBeepDetector/bin/Debug" />
+				</Linker>
 			</Target>
 			<Target title="Release">
 				<Option output="bin/Release/BeepDetector" prefix_auto="1" extension_auto="1" />
