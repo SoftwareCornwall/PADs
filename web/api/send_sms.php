@@ -1,5 +1,5 @@
 <?php
-require '../vendor/twilio-php-master/Services/Twilio.php';
+require_once '../vendor/twilio-php-master/Services/Twilio.php';
 
 function send_sms($body, $phone_numbers)
 {

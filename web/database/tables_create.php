@@ -24,7 +24,6 @@
 		id INT NOT NULL AUTO_INCREMENT,
 		cabinet_id VARCHAR(200) NOT NULL,
 		door_status VARCHAR(200) NOT NULL,
-		defib_status VARCHAR(200) NOT NULL,
 		hanger_status VARCHAR(200) NOT NULL,
 		alarm_status VARCHAR(200) NOT NULL,
 		temp_status INT NOT NULL,

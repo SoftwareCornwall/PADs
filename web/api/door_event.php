@@ -18,7 +18,7 @@ if ($old_door_status == "Closed" && $door_status == "Open") {
   }
 
   // Prepare the message
-  $message = "The defibrillator cabinet ".$cabinet_id." at ".$cabinet_location." has been opened.";
+  $message = "The cabinet ".$cabinet_id." at ".$cabinet_location." has been opened.";
 
   // Send the message
   send_sms($message, $phone_numbers);
