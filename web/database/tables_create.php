@@ -61,6 +61,25 @@
 		$errors_occurred = 1;
 	}
 
+	// Define FLEET table
+	$sql = "CREATE TABLE tbl_fleet(
+		id INT NOT NULL AUTO_INCREMENT,
+		first_name VARCHAR(200) NOT NULL,
+		last_name VARCHAR(200) NOT NULL,
+		phone_number VARCHAR(200) NOT NULL,
+		PRIMARY KEY (id)
+	)";
+
+	// Create FLEET table
+	if ($conn->query($sql) === TRUE) {
+		echo "<p>FLEET table created successfully.</p>";
+	} else {
+		echo "<p>FLEET table creation failed.</br>";
+		echo "Error: " . $conn->error . "</p>";
+		$errors_occurred = 1;
+	}
+
+
 	// If errors occurred
 	if ($errors_occurred == 1) {
 		echo "<p>One or more of the tables could not be created.</br>";
