@@ -6,7 +6,9 @@
 #include "WiringPiPin.hpp"
 #include "MatrixKeypad.hpp"
 #include "HBridgeLock.hpp"
-
+#include "Thermometer.hpp"
+#include "TemperatureCheck.hpp"
+#include "OutputPinSpy.hpp"
 #include "WiringPiPin.hpp"
 #include "LibCurlPostClient.h"
 #include "Cabinet.h"
@@ -24,7 +26,6 @@ chrono::high_resolution_clock::time_point currentTime()
 int main()
 {
     wiringPiSetup();
-
     std::string boxID = "1111R";
     std::string URL = "http://192.168.0.110/events/";
 
@@ -82,6 +83,18 @@ int main()
     keypad.SetKeyPressedCallback(std::bind(&CodeCheck::keyPressed, &codeChecker, _1));
     codeChecker.SetUnlockCallback(std::bind(&HBridgeLock::Unlock, &lock));
 
+    /**** Thermometer ****/
+    int rawValue = 32031;
+    Thermometer thermometer([&rawValue]()
+    {
+        return rawValue;
+    });
+    OutputPinSpy pin;
+    TemperatureCheck temperatureCheck(&pin);
+    temperatureCheck.setTemperatureGetCallback(std::bind(&Thermometer::getTemperature, &thermometer));
+    std::chrono::system_clock::time_point now = currentTime();
+
+
 
     while(true)
     {
@@ -92,6 +105,16 @@ int main()
         lock.Service();
 
         doorSwitch.Service();
+
+
+        if ((currentTime() - now) >= std::chrono::milliseconds(300))
+        {
+            now = currentTime();
+            temperatureCheck.service();
+            cout << "temperature: " << temperatureCheck.getTemperature() << endl;
+
+        }
+
 
         /* Limit how fast ServiceIter is run, otherwise will deplete the
             battery quicker than it should. */

@@ -13,9 +13,9 @@ TEST(ThermometerTests, test_if_0_is_a_fixed_point)
     EXPECT_EQ(0, thermometer1.getTemperature());
 }
 
-TEST(ThermometerTests, test_if_500_is_entered_24_is_output)
+TEST(ThermometerTests, test_if_32031_is_entered_24_is_output)
 {
-    int rawValue = 500;
+    int rawValue = 32031;
     Thermometer thermometer1([&rawValue]()
     {
         return rawValue;
