@@ -1,9 +1,9 @@
-<?php 
+<?php
 
 use \Psr\Http\Message\ServerRequestInterface as Request;//shortens path to 'request'
 use \Psr\Http\Message\ResponseInterface as Response;//^^to 'Response'
 require 'vendor/autoload.php';
-$app = new \Slim\App(); 
+$app = new \Slim\App();
 
 $app->post('/status', function ($request, $response, $args) {
 	$data = $request->getParsedBody(); //creates array from data posted by user
@@ -67,20 +67,33 @@ $app->get('/status/{id}', function ($request, $response, $args) {
 
 	$result = mysqli_query($conn, 'SELECT * FROM tbl_status'); //takes everything from tbl_cabinet, assigns to value $query!>
 
-	$tplArray = array(); 
+	$tplArray = array();
 	while ( $row = mysqli_fetch_array ( $result ) )
 	{
-	    $tplArray[] = array (
-		 'cabinet_id' => $row ['cabinet_id'],
-		 'door_status' => $row ['door_status'], 
-		'defib_status'=>$row['defib_status'],//gets fields from 'select *' to pass to html to display + gives data names
-		'last_update'=>$row['last_update']
+		$cabinet_id = $row['cabinet_id'];
+		$door_status = $row['door_status'];
+		$temp_status = $row['temp_status'];
+		$last_update = $row['last_update']
+
+		if ($row ['hanger_status'] == "Up")	{
+			$defib_status = "Unavailable";
+		} elseif ($row ['alarm_status'] == "Fault") {
+			$defib_status = "Fault"
+		} else {
+			$defib_status = "Available"
+		}
+
+	  $tplArray[] = array (
+			'cabinet_id' => $cabinet_id,
+			'door_status' => $door_status,
+			'defib_status'=>$defib_status,//gets fields from 'select *' to pass to html to display + gives data names
+			'temp_status'=>$temp_status,
+			'last_update'=>$last_update
 	    );
 	}
 
-
-    return $this->view->render($response, '/templates/status.html', //calls sample.html
-        array('cabinets' => $tplArray)); //   'id' => $args['id'] ]);
+  return $this->view->render($response, '/templates/status.html', //calls sample.html
+  	array('cabinets' => $tplArray)); //   'id' => $args['id'] ]);
 });
 
 $app->run();
