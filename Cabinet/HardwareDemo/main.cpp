@@ -5,6 +5,8 @@
 #include "CodeCheck.hpp"
 #include "HBridgeLock.hpp"
 
+#include "MCP3304.hpp"
+
 #include <wiringPi.h>
 
 #include <iostream>
@@ -89,6 +91,11 @@ int main()
         lock.Lock();
         cout << "Hanger pressed" << endl;
     });
+
+    WiringPiPin a2dChipSelect{};
+    a2dChipSelect.ConfigureAsOutput();
+
+    MCP3304 a2d{0, 500000, &a2dChipSelect};
 
     while(1)
     {
