@@ -50,6 +50,8 @@
 		<Unit filename="InputPin.hpp" />
 		<Unit filename="LibCurlPostClient.cpp" />
 		<Unit filename="LibCurlPostClient.h" />
+		<Unit filename="MCP3304.cpp" />
+		<Unit filename="MCP3304.hpp" />
 		<Unit filename="MatrixKeypad.cpp" />
 		<Unit filename="MatrixKeypad.hpp" />
 		<Unit filename="MatrixKeypadReader.cpp" />

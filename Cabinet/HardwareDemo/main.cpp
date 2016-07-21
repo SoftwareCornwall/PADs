@@ -12,6 +12,9 @@
 #include <iostream>
 #include <map>
 
+#include <chrono>
+#include <thread>
+
 using namespace std;
 
 const map<int, char> keyMap =
@@ -92,7 +95,7 @@ int main()
         cout << "Hanger pressed" << endl;
     });
 
-    WiringPiPin a2dChipSelect{};
+    WiringPiPin a2dChipSelect{21};
     a2dChipSelect.ConfigureAsOutput();
 
     MCP3304 a2d{0, 500000, &a2dChipSelect};
@@ -103,6 +106,12 @@ int main()
         hangerSwitch.Service();
         keypad.Service();
         lock.Service();
+        int reading = a2d.Read();
+
+        std::cout << reading << std::endl;
+
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+
     }
     return 0;
 }
