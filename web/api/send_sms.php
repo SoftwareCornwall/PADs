@@ -11,8 +11,7 @@ function send_sms($body, $phone_numbers)
 
   $client = new Services_Twilio($AccountSid, $AuthToken);
 
-  foreach ($phone_numbers as $send_number)
-  {
+  foreach ($phone_numbers as $send_number) {
     $message = $client->account->messages->create(array(
       "From" => "+441671642020", // From a valid Twilio number
       "To" => $send_number,   // Text this number

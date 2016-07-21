@@ -2,14 +2,17 @@ Database Name: pads_db
 
 tbl_cabinets:
   (PK) id - STRING
-  location - STRING *
+  location - STRING
   postcode - STRING
 
 tbl_status:
   (PK) id - AUTO_INCREMENT INT
   (FK) cabinet_id - STRING
   door_status - STRING ("Open" / "Closed")
-  defib_status - STRING ("Available" / "Not Working" / "Removed")
+  defib_status - STRING ("Available" / "Fault" / "Removed")
+  hanger_status - STRING ("Down" / "Up")
+  alarm_status - STRING ("Working" / "Fault")
+  temp_status - INT (Current sensor value)
   last_update - CURRENT TIMESTAMP
 
 tbl_guardians:
@@ -18,6 +21,3 @@ tbl_guardians:
   last_name - STRING
   phone_number - STRING
   (FK) cabinet_id - STRING
-
-* Need to ask on Monday/Tuesday about what location data will need to be
-  stored in our database
