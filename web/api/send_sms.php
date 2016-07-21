@@ -19,6 +19,8 @@ function send_sms($body, $phone_numbers)
     ));
   }
 
+  echo $body;
+
   // Display a confirmation message on the screen
   echo "Sent message {$message->sid}";
 }

@@ -23,9 +23,9 @@
 	$sql = "CREATE TABLE tbl_status (
 		id INT NOT NULL AUTO_INCREMENT,
 		cabinet_id VARCHAR(200) NOT NULL,
-		door_status VARCHAR(200) NOT NULL,
-		hanger_status VARCHAR(200) NOT NULL,
-		alarm_status VARCHAR(200) NOT NULL,
+		door_status TINYINT(1) NOT NULL,
+		hanger_status TINYINT(1) NOT NULL,
+		alarm_status TINYINT(1) NOT NULL,
 		temp_status INT NOT NULL,
 		last_update TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 		PRIMARY KEY (id),

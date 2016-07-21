@@ -8,9 +8,9 @@ tbl_cabinets:
 tbl_status:
   (PK) id - AUTO_INCREMENT INT
   (FK) cabinet_id - STRING
-  door_status - STRING ("Open" / "Closed")
-  hanger_status - STRING ("Down" / "Up")
-  alarm_status - STRING ("Working" / "Fault")
+  door_status - TINYINT (0 = Closed / 1 = Open)
+  hanger_status - TINYINT (0 = Up / 1 = Down)
+  alarm_status - TINYINT (0 = Working / 1 = Fault)
   temp_status - INT (Current sensor value)
   last_update - CURRENT TIMESTAMP
 

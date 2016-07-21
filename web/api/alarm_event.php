@@ -2,7 +2,7 @@
   /* This sends a message and array of phone numbers to the send_sms function.
    * The message body of the SMS can be changed on line 24. */
 
-  if ($old_alarm_status == "Working" && $alarm_status == "Fault") {
+  if ($old_alarm_status == "0" && $alarm_status == "1") {
     // Include the sms file
     require_once 'send_sms.php';
 

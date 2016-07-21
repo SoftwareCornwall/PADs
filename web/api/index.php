@@ -1,9 +1,9 @@
 <?php
   /* API Reference:
    * cabinet_id
-   * door_status (Open/Closed)
-   * hanger_status (Up/Down)
-   * alarm_status (Working/Fault)
+   * door_status (0 = Closed / 1 = Open)
+   * hanger_status (0 = Up / 1 = Down)
+   * alarm_status (0 = Working / 1 = Fault)
    * temp_status (int value of current temperature)*/
 
   // Connect to the database
@@ -14,9 +14,7 @@
   $data = json_decode($data, true);
 
   // If data was posted, add it to the status table
-  if (!empty($data['cabinet_id']) && !empty($data['door_status']) &&
-      !empty($data['hanger_status']) && !empty($data['alarm_status']) &&
-      !empty($data['temp_status'])) {
+  if (!empty($data['cabinet_id']) && !empty($data['temp_status'])) {
 
     // Get and echo the post data
     $cabinet_id = mysqli_real_escape_string($conn, $data['cabinet_id']);
@@ -26,10 +24,10 @@
     $temp_status = mysqli_real_escape_string($conn, $data['temp_status']);
 
     echo "<p>Cabinet ID: ".$cabinet_id;
-    echo "<br>Door Status: ".$door_status;
-    echo "<br>Hanger Status: ".$hanger_status;
-    echo "<br>Alarm Status: ".$alarm_status;
-    echo "<br>Temp Status: ".$temp_status."&#176;C</p>";
+    echo "<br>Door Status: ".(boolval($door_status) ? 'True' : 'False');
+    echo "<br>Hanger Status: ".(boolval($hanger_status) ? 'True' : 'False');
+    echo "<br>Alarm Status: ".(boolval($alarm_status) ? 'True' : 'False');
+    echo "<br>Temp Status: ".$temp_status."°C</p>";
 
     // Declare and set the old status variables
     $old_door_status = "";
