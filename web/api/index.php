@@ -1,12 +1,13 @@
 <?php
+  /* API Reference:
+  */
+
   // Connect to the database
   include_once ('../database/db_connect.php');
 
   // JSON Post Method
   $data = file_get_contents("php://input");
   $data = json_decode($data, true);
-
-  // Declare variables
 
   // If data was posted, add it to the status table
   if (!empty($data['cabinet_id']) && !empty($data['door_status']) &&
@@ -28,6 +29,7 @@
 
     // Declare and set the old status variables
     $old_door_status = "";
+    $old_hanger_status = "";
     $old_alarm_status = "";
 
     $sql = "SELECT * FROM tbl_status WHERE cabinet_id='".$cabinet_id."'
@@ -35,6 +37,7 @@
     $result = mysqli_query($conn, $sql);
     while($row = mysqli_fetch_assoc($result)) {
       $old_door_status = $row['door_status'];
+      $old_hanger_status = $row['hanger_status'];
       $old_alarm_status = $row['alarm_status'];
     }
 
@@ -48,8 +51,9 @@
     }
 
     // Run SMS events
-
     include 'door_event.php';
+    include 'alarm_event.php';
+    include 'hanger_event.php';
   } else {
       echo "No post data recieved.";
   }
