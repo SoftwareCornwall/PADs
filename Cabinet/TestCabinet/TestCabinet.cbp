@@ -58,6 +58,8 @@
 		<Unit filename="MatrixKeypadReaderTests.cpp" />
 		<Unit filename="POSTTests.cpp" />
 		<Unit filename="SwitchTests.cpp" />
+		<Unit filename="TestFunctions.cpp" />
+		<Unit filename="TestFunctions.hpp" />
 		<Unit filename="TestPin.hpp" />
 		<Unit filename="TestTime.cpp" />
 		<Unit filename="TestTime.hpp" />
