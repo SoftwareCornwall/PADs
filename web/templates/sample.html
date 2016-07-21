@@ -3,8 +3,8 @@
 <head>
 	
 <meta http-equiv="refresh" content="5"/>
-
-<title> Remote Monitoring </title>
+		<link rel="stylesheet" type="text/css" href="style_sheet.css">
+	<title> Remote Monitoring </title>
 
 </head>
 
@@ -13,7 +13,6 @@
 -->
 
 <style>
-
 table {
 	width: 100%;
 	color:black;
@@ -22,18 +21,22 @@ table {
 	border: 10px solid black
 	padding: 10px
 }
-
 thead {
 	color:white;	
 	background-color:darkblue;
 }
-
 .status_unavailable {
-background-color:red;
+	background-color:red;
 }
 .status_warning{
-background-color:orange;
+	background-color:orange;
 }
+.door_error {
+	background-color:red;
+	}
+.door_warning{
+	background-color:orange;
+	}
 </style>
 
 <h1>Fleet PADs</h1>
@@ -57,8 +60,8 @@ background-color:orange;
 {% endif %}
 
 {% endfor %}
-
 </tbody>
+
 </table>
 </body>
 </html>
