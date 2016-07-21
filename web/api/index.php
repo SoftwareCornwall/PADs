@@ -1,6 +1,10 @@
 <?php
   /* API Reference:
-  */
+   * cabinet_id
+   * door_status (Open/Closed)
+   * hanger_status (Up/Down)
+   * alarm_status (Working/Fault)
+   * temp_status (int value of current temperature)*/
 
   // Connect to the database
   include_once ('../database/db_connect.php');
@@ -32,10 +36,9 @@
     $old_hanger_status = "";
     $old_alarm_status = "";
 
-    $sql = "SELECT * FROM tbl_status WHERE cabinet_id='".$cabinet_id."'
-            ORDER BY last_update DESC LIMIT 1;";
-    $result = mysqli_query($conn, $sql);
-    while($row = mysqli_fetch_assoc($result)) {
+    $result = mysqli_query($conn,"SELECT * FROM tbl_status WHERE cabinet_id='".$cabinet_id."'
+            ORDER BY last_update DESC LIMIT 1;");
+    while ($row = mysqli_fetch_array($result)) {
       $old_door_status = $row['door_status'];
       $old_hanger_status = $row['hanger_status'];
       $old_alarm_status = $row['alarm_status'];
@@ -54,8 +57,10 @@
     include 'door_event.php';
     include 'alarm_event.php';
     include 'hanger_event.php';
+  } elseif (!empty($data['cabinet_id'])) {
+      echo "<p>Missing some JSON post data. The status update could not be completed.</p>";
   } else {
-      echo "No post data recieved.";
+    echo "<p>No cabinet JSON data received.<p>";
   }
 
   // Close the database connection
