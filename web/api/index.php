@@ -3,8 +3,8 @@
   include_once ('../database/db_connect.php');
 
   // JSON Post Method
-  public $data = file_get_contents("php://input");
-  public $data = json_decode($data, true);
+  $data = file_get_contents("php://input");
+  $data = json_decode($data, true);
 
   // Declare variables
 
