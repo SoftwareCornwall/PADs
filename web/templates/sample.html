@@ -1,67 +1,115 @@
 <!DOCTYPE html>
 <html>
 <head>
-	
-<meta http-equiv="refresh" content="5"/>
-		<link rel="stylesheet" type="text/css" href="style_sheet.css">
-	<title> Remote Monitoring </title>
-
+		<meta http-equiv="refresh" content="120"/>
+		<title> PADs Defibrillators </title>
 </head>
-
-<!--<body>
-<button type="button" onclick="javascript:window.location.href='../../templates/sample_form.html'">Create new record</button>
--->
-
 <style>
-table {
-	width: 100%;
-	color:black;
-	background-color:white;
-	margin: 1px auto;
-	border: 10px solid black
-	padding: 10px
-}
-thead {
-	color:white;	
-	background-color:darkblue;
-}
-.status_unavailable {
-	background-color:red;
-}
-.status_warning{
-	background-color:orange;
-}
-.door_error {
-	background-color:red;
+	.logo {
+		display: block; 
+		width: 150px;
+		height: 150px;
+		float: right;	
 	}
-.door_warning{
-	background-color:orange;
+	.table {
+		width: 100%;
+		color: black;
+		background-color: white;
+		margin: 1px auto;
+		border: 10px solid black;
+		padding: 10px;
+	}
+	thead {
+		color: white;	
+		background-color: darkblue;
+	}
+	.status_unavailable {
+		background-color: red;
+	}
+	.status_warning {
+		background-color: orange;
+	}
+	.door_error {
+		background-color: red;
+	}
+	.door_warning {
+		background-color: orange;
 	}
 </style>
 
-<h1>Fleet PADs</h1>
-<p>{{cab.cut_off_time}}</p>
-<table>
-<thead><tr><th>ID</th><th>Location</th><th>Postcode</th><th>Door Status</th><th>Defib Status</th><th>Last Update</th><th>Cut Off Time</th></tr></thead>
-<tbody>
-{% for cab in cabinets %}
+<body>
 
-{% if cab.last_update < cab.cut_off_time %}
-	<tr  class="status_unavailable"><td>{{ cab.id }}</td><td>{{ cab.location }}</td><td>{{cab.postcode}}</td><td>{{cab.door_status}}</td><td>{{cab.defib_status}}</td><td>{{cab.last_update}}</td><td>{{cab.cut_off_time}}</td></tr>
+	<img class="logo" src="http://fleet.org.uk/images/Fleet-Logo-150x150.jpg" alt="Fleet Logo"  />
+	<!--<button type="button" onclick="javascript:window.location.href='../../templates/sample_form.html'">Create new record</button>-->
+	
+	<h1>Fleet PADs</h1>
+	<p>{{cab.cut_off_time}}</p>
+	<table>
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Location</th>
+				<th>Postcode</th>
+				<th>Door Status</th>
+				<th>Defib Status</th>
+				<th>Last Update</th>
+			</tr>
+		</thead>
 
-{% elseif cab.defib_status == "Unavailable" %}
-	<tr  class="status_unavailable"><td>{{ cab.id }}</td><td>{{ cab.location }}</td><td>{{cab.postcode}}</td><td>{{cab.door_status}}</td><td>{{cab.defib_status}}</td><td>{{cab.last_update}}</td><td>{{cab.cut_off_time}}</td></tr>
+		<tbody>
+	
+		{% for cab in cabinets %}
 
-{% elseif cab.door_status == "Open" %}
-	<tr  class="status_warning"><td>{{ cab.id }}</td><td>{{ cab.location }}</td><td>{{cab.postcode}}</td><td>{{cab.door_status}}</td><td>{{cab.defib_status}}</td><td>{{cab.last_update}}</td><td>{{cab.cut_off_time}}</td></tr>
+		{% if cab.last_update == cab.cut_off_time %}<!-- change back to < / -->
+			<tr  class="status_unavailable">
+				<td>{{ cab.id }}</td>
+				<td>{{ cab.location }}</td>
+				<td>{{cab.postcode}}</td>
+				<td>{{cab.door_status}}</td>
+				<td>{{cab.defib_status}}</td>
+				<td>{{cab.last_update}}</td>
+			</tr>
 
-{% else %}
-<tr><td>{{ cab.id }}</td><td>{{ cab.location }}</td><td>{{cab.postcode}}</td><td>{{cab.door_status}}</td><td>{{cab.defib_status}}</td><td>{{cab.last_update}}</td><td>{{cab.cut_off_time}}</td></tr>
-{% endif %}
+		{% elseif cab.defib_status == "Unavailable" %}
+			<tr  class="status_unavailable">
+				<td>{{ cab.id }}</td>
+				<td>{{ cab.location }}</td>
+				<td>{{cab.postcode}}</td>
+				<td>{{cab.door_status}}</td>
+				<td>{{cab.defib_status}}</td>
+				<td>{{cab.last_update}}</td>
+			</tr>
 
-{% endfor %}
-</tbody>
+		{% elseif cab.door_status == "Open" %}
+			<tr  class="status_warning">
+				<td>{{ cab.id }}</td>
+				<td>{{ cab.location }}</td>
+				<td>{{cab.postcode}}</td>
+				<td>{{cab.door_status}}</td>
+				<td>{{cab.defib_status}}</td>
+				<td>{{cab.last_update}}</td>
+			</tr>
 
+		{% else %}
+			<tr>
+				<td>{{ cab.id }}</td>
+				<td>{{ cab.location }}</td>
+				<td>{{cab.postcode}}</td>
+				<td>{{cab.door_status}}</td>
+				<td>{{cab.defib_status}}</td>
+				<td>{{cab.last_update}}</td>
+			</tr>
+
+		{% endif %}
+
+	{% endfor %}
+
+	</tbody>
 </table>
+
 </body>
 </html>
+
+
+
+
