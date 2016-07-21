@@ -6,8 +6,14 @@ Postman::Postman(std::string serverAddress, HTTPPostClient *client)
     this->serverAddress = serverAddress;
 }
 
-bool Postman::sendEventNotification(std::string boxID, std::string doorStatus, std::string hangerStatus)
+bool Postman::sendEventNotification(std::string boxID, bool doorIsOpen, bool hangerIsDown)
 {
+
+    std::string doorStatus = "Closed";
+    if (doorIsOpen) doorStatus = "Open";
+
+    std::string hangerStatus = "Up";
+    if (hangerIsDown) hangerStatus = "Down";
 
     std::string boxPOSTData = "{\n"
     "  \"cabinet_id\" : \"" + boxID + "\", \n"

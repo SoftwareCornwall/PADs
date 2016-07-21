@@ -3,6 +3,7 @@
 
 #include "Postman.h"
 #include "Switch.hpp"
+#include <chrono>
 
 class Cabinet
 {
@@ -11,12 +12,16 @@ class Cabinet
         virtual ~Cabinet();
         bool DoorEventCallback(bool doorOpen);
         bool HangerEventCallback(bool hangerDown);
-        bool IsSubstringPresentInOutputString(std::string subStr, std::string outputStr);
+        void StatusService();
     protected:
     private:
-        Postman *postie;
+       Postman *postie;
         Switch *doorSwitch;
+        Switch *hangerSwitch;
         std::string boxID;
+        std::chrono::high_resolution_clock::time_point lastMessageSentTime;
+        bool doorIsOpen;
+        bool hangerIsDown;
 };
 
 #endif // CABINET_H

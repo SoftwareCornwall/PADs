@@ -97,8 +97,9 @@ int main()
         lock.Service();
 
         doorSwitch.Service();
-
         hangerSwitch.Service();
+
+        cabinet.StatusService();
 
         /* Limit how fast ServiceIter is run, otherwise will deplete the
             battery quicker than it should. */

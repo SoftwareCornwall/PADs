@@ -1,6 +1,10 @@
 #include "Cabinet.h"
 #include <iostream>
 #include <algorithm>    // std::search
+#include "CurrentTime.hpp"
+#include <chrono>
+
+using namespace ::std::chrono;
 
 Cabinet::Cabinet(Postman *postie, std::string boxID) :
     postie(postie), boxID(boxID)
@@ -15,19 +19,25 @@ Cabinet::~Cabinet()
 
 bool Cabinet::DoorEventCallback(bool doorOpen)
 {
+    doorIsOpen = doorOpen;
 
-    if(doorOpen)
+   /* if(doorOpen)
     {
         return postie->sendEventNotification(boxID, "Open", "Down");
     }
     return false;
 
+    */
+
+    return postie->sendEventNotification(boxID, doorIsOpen, hangerIsDown);
+
 }
 
 bool Cabinet::HangerEventCallback(bool hangerDown)
 {
+    hangerIsDown = hangerDown;
 
-    if(hangerDown)
+    /* if(hangerDown)
     {
         return postie->sendEventNotification(boxID, "Open", "Down");
     }
@@ -36,18 +46,23 @@ bool Cabinet::HangerEventCallback(bool hangerDown)
         return postie->sendEventNotification(boxID, "Open", "Up");
     }
     return false;
+    */
+
+    return postie->sendEventNotification(boxID, doorIsOpen, hangerIsDown);
 
 }
 
-bool Cabinet::IsSubstringPresentInOutputString(std::string subStr, std::string outputStr)
+void Cabinet::StatusService()
 {
-    auto foundStart = std::search(outputStr.begin(), outputStr.end(), subStr.begin(), subStr.end());
-
-    if (foundStart != outputStr.end())
+    if ((currentTime() - lastMessageSentTime) >= minutes(15))
     {
-        return true;
+        lastMessageSentTime = currentTime();
+        postie->sendEventNotification(boxID, doorIsOpen, hangerIsDown);
     }
-    return false;
 
 }
+
+
+
+
 

@@ -10,6 +10,7 @@
 #include "Switch.hpp"
 
 #include "Cabinet.h"
+#include "TestFunctions.hpp"
 
 using namespace ::testing;
 using namespace ::std::chrono;
@@ -40,7 +41,7 @@ TEST_F(HangerTests, Cabinet_sends_event_on_hanger_down)
     client.sendPostMsgResult = true;
 
     cabinet.HangerEventCallback(true);
-    ASSERT_TRUE(cabinet.IsSubstringPresentInOutputString("  \"hanger_status\" : \"Down\" \n", client.lastPOSTData));
+    ASSERT_TRUE(IsSubstringPresentInOutputString("  \"hanger_status\" : \"Down\" \n", client.lastPOSTData));
     ASSERT_EQ(URL, client.lastPOSTURL);
 
 }
@@ -53,7 +54,9 @@ TEST_F(HangerTests, Cabinet_sends_event_on_hanger_up)
     client.sendPostMsgResult = true;
 
     cabinet.HangerEventCallback(false);
-    ASSERT_TRUE(cabinet.IsSubstringPresentInOutputString("  \"hanger_status\" : \"Up\" \n", client.lastPOSTData));
+    ASSERT_TRUE(IsSubstringPresentInOutputString("  \"hanger_status\" : \"Up\" \n", client.lastPOSTData));
     ASSERT_EQ(URL, client.lastPOSTURL);
 
 }
+
+
