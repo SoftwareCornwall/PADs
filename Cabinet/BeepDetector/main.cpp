@@ -1,52 +1,50 @@
 #include "AlsaMicrophoneInput.h"
 #include <iostream>
 #include <signal.h>
+#include <bitset>
 
 bool continueRunning = true;
 
 void StopLoop(int signal)
 {
-    std::cout << "Signal to interrupt!" << std::endl;
+    // This will release the capture audio device for use
+    // with other applications.
     continueRunning = false;
 }
 
 int main()
 {
 
-    signal(SIGINT, &StopLoop);
-
     int alsaErrorCode = 0;
     snd_pcm_uframes_t periodSize{4096};
 
     AlsaMicrophoneInput mic;
-    alsaErrorCode = mic.SetupAudioDevice("hw:1", 16384, 44100, 2, periodSize);
+    int channels = 2;
+    alsaErrorCode = mic.SetupAudioDevice("hw:1", 16384, 44100, channels, periodSize);
 
     if (alsaErrorCode < 0)
     {
         return -1;
     }
 
-    for(int i = 0; i < 512 && continueRunning == true; i++)
+    for(int i = 0; i < 1024 && continueRunning == true; i++)
     {
         char *frames = mic.GetFrames(1024, &alsaErrorCode);
-        int averageFrame = 0;
+        short *frames_short = reinterpret_cast<short*>(frames);
+        int averageSample = 0;
 
-        for(int sample = 0; sample < 2048; sample++)
+        for(int sample = 0; sample < (1024 * channels); sample += channels)
         {
-            short currentFrame = static_cast<short>(frames[sample]);
-            currentFrame = currentFrame | (static_cast<short>(frames[sample + 1]) << 8);
-            currentFrame /= (65536/64);
-            averageFrame += (currentFrame > 0 ? currentFrame : -currentFrame);
-
+            short currentSample = frames_short[sample];
+            currentSample /= (65536/4096);
+            averageSample += (currentSample > 0 ? currentSample : -currentSample);
         }
-        averageFrame /= 2048;
+        averageSample /= (1024 * channels);
 
-        std::cout << std::string(static_cast<size_t>(averageFrame), '>') << std::endl;
+        std::cout << std::to_string(averageSample) << " " << std::string(static_cast<size_t>(averageSample), '>') << std::endl;
 
         free(frames);
     }
-
-
 
     return 0;
 

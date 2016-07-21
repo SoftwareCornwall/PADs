@@ -1,11 +1,111 @@
-#include "BeepDetectorTests.h"
+#include <gtest/gtest.h>
+#include "FakeMicrophoneInput.h"
+#include "Goertzel.h"
 
-BeepDetectorTests::BeepDetectorTests()
+using namespace ::testing;
+
+bool continueRunning = true;
+
+void StopLoop(int signal)
 {
-    //ctor
+    // This will release the capture audio device for use
+    // with other applications.
+    continueRunning = false;
 }
 
-BeepDetectorTests::~BeepDetectorTests()
+class BeepDetectorTests : public Test
 {
-    //dtor
+public:
+
+    BeepDetectorTests()
+    {
+    }
+
+};
+
+TEST_F(BeepDetectorTests, Read_Fake_Input_File_Samples)
+{
+
+    FakeMicrophoneInput FakeMic;
+
+    int errorCode = 0;
+    char *frameBuffer = nullptr;
+
+    FakeMic.SetupAudioDevice("", 16384, 44100, 1, 4096);
+    FakeMic.LoadAudioFile("SampleNoise0_1s.wav");
+    frameBuffer = FakeMic.GetFrames(4, &errorCode);
+
+    EXPECT_EQ(48, frameBuffer[0]);
+    EXPECT_EQ(70, frameBuffer[1]);
+    EXPECT_EQ(16, frameBuffer[2]);
+    EXPECT_EQ(182, frameBuffer[3]);
+    EXPECT_EQ(123, frameBuffer[4]);
+    EXPECT_EQ(87, frameBuffer[5]);
+    EXPECT_EQ(218, frameBuffer[6]);
+    EXPECT_EQ(169, frameBuffer[7]);
+
+    free(frameBuffer);
+
+}
+
+TEST_F(BeepDetectorTests, Read_Fake_Input_And_Process)
+{
+
+    continueRunning = true;
+
+    signal(SIGINT, &StopLoop);
+
+    FakeMicrophoneInput mic;
+
+    mic.LoadAudioFile("tone-440-480.flac");
+
+    int alsaErrorCode = 0;
+    unsigned long periodSize{4096};
+    int channels = 1;
+    alsaErrorCode = mic.SetupAudioDevice("hw:1", 16384, 44100, channels, periodSize);
+
+    for(int i = 0; i < 16 && continueRunning == true; i++)
+    {
+        char *frames = mic.GetFrames(1024, &alsaErrorCode);
+        short *frames_short = reinterpret_cast<short*>(frames);
+        double frequency_effect = goertzel_mag(1024 * channels, 440, 44100, frames_short);
+        //std::cout << std::to_string(frequency_effect) << " " << std::string(static_cast<size_t>(frequency_effect/1024), '>') << std::endl;
+        EXPECT_LE(23000, frequency_effect);
+        EXPECT_GE(25000, frequency_effect);
+        free(frames);
+    }
+
+}
+
+TEST_F(BeepDetectorTests, Read_Fake_Input_And_Process)
+{
+
+    continueRunning = true;
+
+    signal(SIGINT, &StopLoop);
+
+    FakeMicrophoneInput mic;
+
+    mic.LoadAudioFile("tone-440-480.flac");
+
+    int alsaErrorCode = 0;
+    unsigned long periodSize{4096};
+    int channels = 1;
+    alsaErrorCode = mic.SetupAudioDevice("hw:1", 16384, 44100, channels, periodSize);
+    std::vector<double> magnitudeVector;
+    for(int i = 0; i < 1024 && continueRunning == true; i++)
+    {
+        char *frames = mic.GetFrames(1024, &alsaErrorCode);
+        short *frames_short = reinterpret_cast<short*>(frames);
+
+        double frequency_effect = goertzel_mag(1024 * channels, 440, 44100, frames_short);
+        magnitudeVector.push_back(frequency_effect);
+        //std::cout << std::to_string(frequency_effect) << " " << std::string(static_cast<size_t>(frequency_effect/1024), '>') << std::endl;
+        free(frames);
+    }
+    for(int i = 0; i < magnitudeVector.size(); i++)
+    {
+
+    }
+
 }

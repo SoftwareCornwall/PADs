@@ -1,6 +1,6 @@
 #ifndef MICROPHONEINPUT_H
 #define MICROPHONEINPUT_H
-
+#include <string>
 
 class MicrophoneInput
 {
