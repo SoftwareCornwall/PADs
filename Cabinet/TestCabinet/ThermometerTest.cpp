@@ -1,5 +1,7 @@
 #include <gtest/gtest.h>
 #include "Thermometer.hpp"
+#include "TemperatureCheck.hpp"
+#include "OutputPinSpy.hpp"
 
 TEST(ThermometerTests, test_if_0_is_a_fixed_point)
 {
@@ -8,7 +10,7 @@ TEST(ThermometerTests, test_if_0_is_a_fixed_point)
     {
         return rawValue;
     });
-    EXPECT_EQ(0, thermometer1.getTemp());
+    EXPECT_EQ(0, thermometer1.getTemperature());
 }
 
 TEST(ThermometerTests, test_if_500_is_entered_24_is_output)
@@ -18,6 +20,8 @@ TEST(ThermometerTests, test_if_500_is_entered_24_is_output)
     {
         return rawValue;
     });
-    EXPECT_EQ(24, thermometer1.getTemp());
+    EXPECT_EQ(24, thermometer1.getTemperature());
 }
+
+
 

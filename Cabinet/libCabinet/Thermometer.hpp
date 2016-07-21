@@ -9,11 +9,11 @@ class Thermometer
     public:
         Thermometer(std::function<int()> callback);
         void Service();//not sure yet
-        int getTemp();
+        int getTemperature();
     protected:
     private:
-        void TempConverter ();
-        std::function<int()> tempReadCallback;
+        void TemperatureConverter ();
+        std::function<int()> temperatureReadCallback;
         int temperature = 11;//incase real temp is not yet processed, it does not trigger any checks
 
 };

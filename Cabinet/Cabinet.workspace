@@ -2,13 +2,13 @@
 <CodeBlocks_workspace_file>
 	<Workspace title="Cabinet">
 		<Project filename="libCabinet/libCabinet.cbp" />
-		<Project filename="TestCabinet/TestCabinet.cbp">
-			<Depends filename="libCabinet/libCabinet.cbp" />
-		</Project>
 		<Project filename="Cabinet/Cabinet.cbp">
 			<Depends filename="libCabinet/libCabinet.cbp" />
 		</Project>
 		<Project filename="HardwareDemo/HardwareDemo.cbp">
+			<Depends filename="libCabinet/libCabinet.cbp" />
+		</Project>
+		<Project filename="TestCabinet/TestCabinet.cbp">
 			<Depends filename="libCabinet/libCabinet.cbp" />
 		</Project>
 	</Workspace>

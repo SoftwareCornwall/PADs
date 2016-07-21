@@ -85,6 +85,9 @@ int main()
 
     while(true)
     {
+
+        //we will call temp service every 30 secs using the now chrono
+
         keypad.Service();
         lock.Service();
 

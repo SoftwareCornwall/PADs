@@ -59,10 +59,12 @@
 		<Unit filename="Postman.h" />
 		<Unit filename="Switch.cpp" />
 		<Unit filename="Switch.hpp" />
+		<Unit filename="TemperatureCheck.cpp" />
+		<Unit filename="TemperatureCheck.hpp" />
+		<Unit filename="Thermometer.cpp" />
+		<Unit filename="Thermometer.hpp" />
 		<Unit filename="WiringPiPin.cpp" />
 		<Unit filename="WiringPiPin.hpp" />
-		<Unit filename="include/Thermometer.h" />
-		<Unit filename="src/Thermometer.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />

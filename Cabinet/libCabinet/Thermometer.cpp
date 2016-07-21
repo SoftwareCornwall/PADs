@@ -3,17 +3,17 @@
 
 Thermometer::Thermometer(std::function<int()> callback)
 {
-    tempReadCallback = callback;
+    temperatureReadCallback = callback;
 }
 
-void Thermometer::TempConverter ()
+void Thermometer::TemperatureConverter ()
 {
-    int rawValue = tempReadCallback();
+    int rawValue = temperatureReadCallback();
     temperature = round((((float)rawValue * 50) / 1023));
 }
 
-int Thermometer::getTemp()
+int Thermometer::getTemperature()
 {
-    TempConverter();
+    TemperatureConverter();
     return temperature;
 }
