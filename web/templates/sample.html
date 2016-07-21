@@ -2,7 +2,7 @@
 <html>
 <head>
 
-<title> Remote Monitoring </title>
+	<title> Remote Monitoring </title>
 
 </head>
 
@@ -12,43 +12,43 @@
 <button type="button" onclick="window.location.reload(true);">Update</button>
 <style>
 
-table {
-	width: 100%;
-	color:black;
-	background-color:white;
-	margin: 1px auto;
-	border: 10px solid black
-	padding: 10px
-}
+	table {
+		width: 80%;
+		color:black;
+		background-color:white;
+		margin: 1px auto;
+		border: 10px solid black
+		padding: 10px
+	}
 
-thead {
-	background-color:lightgreen;
-}
+	thead {
+		background-color:lightgreen;
+	}
 
-.door_error {
-background-color:red;
-}
-.door_warning{
-background-color:orange;
-}
+	.door_error {
+	background-color:red;
+	}
+	.door_warning{
+	background-color:orange;
+	}
 </style>
 
 <h1>Fleet PADs</h1>
 <table>
-<thead><tr><th>ID</th><th>Location</th><th>Postcode</th><th>Door Status</th><th>Defib Status</th></tr></thead>
-<tbody>
-{% for cab in cabinets %}
+	<thead><tr><th>ID</th><th>Location</th><th>Postcode</th><th>Door Status</th><th>Defib Status</th></tr></thead>
+	<tbody>
+	{% for cab in cabinets %}
 
-{% if cab.door_status == "Not available" %}
-	<tr  class="door_error"><td>{{ cab.id }}</td><td>{{ cab.location }}</td><td>{{cab.postcode}}</td><td><i>{{cab.door_status}}</i></td><td>{{cab.defib_status}}</td></tr>
-{% elseif cab.door_status == "Open" %}
-	<tr  class="door_warning"><td>{{ cab.id }}</td><td>{{ cab.location }}</td><td>{{cab.postcode}}</td><td><i>{{cab.door_status}}</i></td><td>{{cab.defib_status}}</td></tr>
-{% else %}
-<tr><td>{{ cab.id }}</td><td>{{ cab.location }}</td><td>{{cab.postcode}}</td><td>{{cab.door_status}}</td><td>{{cab.defib_status}}</td></tr>
-{% endif %}
+	{% if cab.door_status == "Not available" %}
+		<tr  class="door_error"><td>{{ cab.id }}</td><td>{{ cab.location }}</td><td>{{cab.postcode}}</td><td><i>{{cab.door_status}}</i></td><td>{{cab.defib_status}}</td></tr>
+	{% elseif cab.door_status == "Open" %}
+		<tr  class="door_warning"><td>{{ cab.id }}</td><td>{{ cab.location }}</td><td>{{cab.postcode}}</td><td><i>{{cab.door_status}}</i></td><td>{{cab.defib_status}}</td></tr>
+	{% else %}
+	<tr><td>{{ cab.id }}</td><td>{{ cab.location }}</td><td>{{cab.postcode}}</td><td>{{cab.door_status}}</td><td>{{cab.defib_status}}</td></tr>
+	{% endif %}
 
-{% endfor %}
-</tbody>
+	{% endfor %}
+	</tbody>
 </table>
 </body>
 </html>
