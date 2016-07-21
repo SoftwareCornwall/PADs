@@ -1,7 +1,7 @@
 
 all:
 	@echo \#\#teamcity[progressMessage \'Building Cabinet Workspace\']
-	codeblocks --multiple-instance --rebuild --target=Debug Cabinet.workspace
+	-codeblocks --multiple-instance --rebuild --target=Debug Cabinet.workspace
 
 	@echo \#\#teamcity[progressMessage \'Running Cabinet Tests\']
 	-TestCabinet/bin/Debug/TestCabinet --gtest_output=xml:cabinet-tests.xml
