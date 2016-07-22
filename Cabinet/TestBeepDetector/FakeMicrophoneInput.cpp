@@ -47,8 +47,6 @@ char* FakeMicrophoneInput::GetFrames(int numberOfFrames, int *ErrorCode)
         return nullptr;
     }
 
-    std::cout << std::to_string(framesRead) << " frames read" << std::endl;
-
     return buffer;
 
 }

@@ -100,3 +100,33 @@ TEST_F(BeepDetectorTests, Read_Fake_Input_And_Find_RMS)
 
     ASSERT_LE(50, correlationData[0]/correlationData[1]);
 }
+
+
+TEST_F(BeepDetectorTests, Read_Fake_Input_And_Detect_Beeping)
+{
+    continueRunning = true;
+    signal(SIGINT, &StopLoop);
+    int errorCode = 0;
+    unsigned long periodSize{1024};
+
+    FakeMicrophoneInput mic;
+
+    mic.LoadAudioFile("tone-440-480.flac");
+    int channels = 1;
+    int sampleRate = 44100;
+    int beepFrequency = 440;
+    int seconds = 15;
+    errorCode = mic.SetupAudioDevice("", 4096, sampleRate, channels, periodSize);
+
+    std::vector<double> periodsVector = {0.5,1.0,3.5,4.0};
+
+    std::vector<double> correlationData = AnalyzeAudioCorrelation(beepFrequency,periodsVector,sampleRate,1,seconds,1024,&mic,&continueRunning,&errorCode);
+
+    double firstCorrelationRatio = correlationData[0]/correlationData[1];
+    double secondCorrelationRatio = correlationData[2]/correlationData[3];
+
+    ASSERT_LE(5, firstCorrelationRatio);
+    ASSERT_LE(3, secondCorrelationRatio);
+
+}
+
