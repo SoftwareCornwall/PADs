@@ -22,6 +22,7 @@
 					<Add library="gtest_main" />
 					<Add library="pthread" />
 					<Add library="BeepDetector" />
+					<Add library="sndfile" />
 					<Add directory="../libBeepDetector/bin/Debug" />
 				</Linker>
 			</Target>
@@ -44,7 +45,6 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="BeepDetectorTests.cpp" />
-		<Unit filename="BeepDetectorTests.h" />
 		<Unit filename="FakeMicrophoneInput.cpp" />
 		<Unit filename="FakeMicrophoneInput.h" />
 		<Extensions>

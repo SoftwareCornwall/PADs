@@ -1,5 +1,7 @@
 #include <gtest/gtest.h>
+#include <cmath>
 #include "FakeMicrophoneInput.h"
+#include "AnalyzeAudioSection.h"
 #include "Goertzel.h"
 
 using namespace ::testing;
@@ -77,7 +79,7 @@ TEST_F(BeepDetectorTests, Read_Fake_Input_And_Process)
 
 }
 
-TEST_F(BeepDetectorTests, Read_Fake_Input_And_Process)
+TEST_F(BeepDetectorTests, Read_Fake_Input_And_Find_RMS)
 {
 
     continueRunning = true;
@@ -88,24 +90,13 @@ TEST_F(BeepDetectorTests, Read_Fake_Input_And_Process)
 
     mic.LoadAudioFile("tone-440-480.flac");
 
-    int alsaErrorCode = 0;
+    int errorCode = 0;
     unsigned long periodSize{4096};
     int channels = 1;
-    alsaErrorCode = mic.SetupAudioDevice("hw:1", 16384, 44100, channels, periodSize);
-    std::vector<double> magnitudeVector;
-    for(int i = 0; i < 1024 && continueRunning == true; i++)
-    {
-        char *frames = mic.GetFrames(1024, &alsaErrorCode);
-        short *frames_short = reinterpret_cast<short*>(frames);
+    errorCode = mic.SetupAudioDevice("hw:1", 16384, 44100, channels, periodSize);
+    std::vector<double> periodsVector = {0.5,1.0};
+    std::vector<double> correlationData = AnalyzeAudioCorrelation(440,periodsVector,44100,1,15,1024,&mic,&continueRunning,&errorCode);
 
-        double frequency_effect = goertzel_mag(1024 * channels, 440, 44100, frames_short);
-        magnitudeVector.push_back(frequency_effect);
-        //std::cout << std::to_string(frequency_effect) << " " << std::string(static_cast<size_t>(frequency_effect/1024), '>') << std::endl;
-        free(frames);
-    }
-    for(int i = 0; i < magnitudeVector.size(); i++)
-    {
 
-    }
-
+    ASSERT_LE(50, correlationData[0]/correlationData[1]);
 }

@@ -39,6 +39,8 @@
 		</Build>
 		<Unit filename="AlsaMicrophoneInput.cpp" />
 		<Unit filename="AlsaMicrophoneInput.h" />
+		<Unit filename="Goertzel.cpp" />
+		<Unit filename="Goertzel.h" />
 		<Unit filename="MicrophoneInput.h" />
 		<Extensions>
 			<envvars />
