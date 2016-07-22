@@ -71,13 +71,13 @@ $app->get('/status/{id}', function ($request, $response, $args) {
 	while ( $row = mysqli_fetch_array ( $result ) )
 	{
 		$cabinet_id = $row['cabinet_id'];
-		$door_status = $row['door_status'];
+		$door_open = (boolval($row['door_status']) ? 'True' : 'False');
 		$temp_status = $row['temp_status'];
-		$last_update = $row['last_update']
+		$last_update = $row['last_update'];
 
-		if ($row ['hanger_status'] == "Up")	{
+		if ($row ['defib_removed'] == 1)	{
 			$defib_status = "Unavailable";
-		} elseif ($row ['alarm_status'] == "Fault") {
+		} elseif ($row ['alarm_status'] == 1) {
 			$defib_status = "Fault"
 		} else {
 			$defib_status = "Available"
@@ -85,10 +85,10 @@ $app->get('/status/{id}', function ($request, $response, $args) {
 
 	  $tplArray[] = array (
 			'cabinet_id' => $cabinet_id,
-			'door_status' => $door_status,
-			'defib_status'=>$defib_status,//gets fields from 'select *' to pass to html to display + gives data names
-			'temp_status'=>$temp_status,
-			'last_update'=>$last_update
+			'door_status' => $door_open,
+			'defib_status' => $defib_status,//gets fields from 'select *' to pass to html to display + gives data names
+			'temp_status' => $temp_status,
+			'last_update' => $last_update
 	    );
 	}
 
