@@ -1,8 +1,8 @@
 <?php
   /* API Reference:
    * cabinet_id
-   * door_status (0 = Closed / 1 = Open)
-   * hanger_status (0 = Up / 1 = Down)
+   * door_open (0 = Closed / 1 = Open)
+   * defib_removed (0 = In Cabinet / 1 = Removed)
    * alarm_status (0 = Working / 1 = Fault)
    * temp_status (int value of current temperature)*/
 

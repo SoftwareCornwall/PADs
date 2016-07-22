@@ -27,7 +27,7 @@
     }
 
     // Prepare the message
-    $message = "Cabinet ".$cabinet_id." in ".$cabinet_location." has been opened.";
+    $message = "Cabinet ".$cabinet_id." at ".$cabinet_location." has been opened.";
 
     // Send the message
     send_sms($message, $phone_numbers);

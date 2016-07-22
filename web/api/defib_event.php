@@ -21,7 +21,7 @@
     }
 
     // Prepare the message
-    $message = "Defibrillator removed from cabinet ".$cabinet_id." in ".$cabinet_location.".";
+    $message = "Defibrillator removed from cabinet ".$cabinet_id." at ".$cabinet_location.".";
 
     // Send the message
     if (!empty($phone_numbers)) {

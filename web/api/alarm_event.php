@@ -21,7 +21,7 @@
     }
 
     // Prepare the message
-    $message = "Defibrillator fault reported by cabinet ".$cabinet_id." in ".$cabinet_location.".";
+    $message = "Defibrillator fault reported by cabinet ".$cabinet_id." at ".$cabinet_location.".";
 
     // Send the message
     if (!empty($phone_numbers)) {
