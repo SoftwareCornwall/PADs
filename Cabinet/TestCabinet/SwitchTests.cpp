@@ -23,11 +23,12 @@ public:
     doorCallback doorSwitchCallback;
     TestPin pin;
     Switch doorSwitch;
+    bool callbackState;
 
     SwitchTests() : postie(URL, &client),
                     cabinet(&postie, boxID),
                     doorSwitchCallback(std::bind(&Cabinet::DoorEventCallback, cabinet, std::placeholders::_1)),
-                    doorSwitch{&pin, doorSwitchCallback}
+                    doorSwitch{&pin, [this](bool state) { callbackState = state; }}
     {
     }
 
@@ -54,6 +55,7 @@ TEST_F(SwitchTests, Pin_state_high_for_10ms_indicates_switch_pressed)
 {
     fakeTime = high_resolution_clock::time_point();
     pin.state = true;
+    callbackState = false;
 
     TimeElapseTest(0);
 
@@ -62,6 +64,8 @@ TEST_F(SwitchTests, Pin_state_high_for_10ms_indicates_switch_pressed)
     fakeTime += milliseconds(1);
     doorSwitch.StateCheck();
     ASSERT_TRUE(doorSwitch.IsPressed());
+
+    ASSERT_TRUE(callbackState);
 
 }
 
@@ -86,4 +90,31 @@ TEST_F(SwitchTests, Pin_state_high_for_10ms_after_bounce_indicates_switch_presse
     fakeTime += milliseconds(3); //fakeTime = 13ms
     doorSwitch.StateCheck();
     ASSERT_TRUE(doorSwitch.IsPressed());
+}
+
+TEST_F(SwitchTests, Pin_state_low_after_10ms_high_indicates_switch_released)
+{
+    fakeTime = high_resolution_clock::time_point();
+    pin.state = true;
+    callbackState = false;
+
+    TimeElapseTest(0);
+
+    TimeElapseTest(9);
+
+    fakeTime += milliseconds(1);
+    doorSwitch.StateCheck();
+
+    ASSERT_TRUE(doorSwitch.IsPressed());
+
+    pin.state = false;
+    doorSwitch.StateCheck();
+
+    ASSERT_FALSE(callbackState);
+
+    // Check callback only happens once
+    callbackState = true;
+    doorSwitch.StateCheck();
+
+    ASSERT_TRUE(callbackState);
 }

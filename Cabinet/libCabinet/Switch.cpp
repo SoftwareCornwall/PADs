@@ -23,6 +23,10 @@ void Switch::StateCheck()
 
     if(pin->State() == false)
     {
+        if(PressedState)
+        {
+            doorCallbackFunction(false);
+        }
         PressedState = false;
         previouslyPressed = false;
     }
