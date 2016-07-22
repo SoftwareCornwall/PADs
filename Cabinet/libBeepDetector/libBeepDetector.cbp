@@ -39,9 +39,13 @@
 		</Build>
 		<Unit filename="AlsaMicrophoneInput.cpp" />
 		<Unit filename="AlsaMicrophoneInput.h" />
+		<Unit filename="AnalyzeAudioSection.cpp" />
+		<Unit filename="AnalyzeAudioSection.h" />
 		<Unit filename="Goertzel.cpp" />
 		<Unit filename="Goertzel.h" />
 		<Unit filename="MicrophoneInput.h" />
+		<Unit filename="autocorrelation.cpp" />
+		<Unit filename="autocorrelation.h" />
 		<Extensions>
 			<envvars />
 			<code_completion />
