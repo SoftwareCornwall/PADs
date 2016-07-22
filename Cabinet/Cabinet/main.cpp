@@ -8,7 +8,6 @@
 #include "HBridgeLock.hpp"
 #include "Thermometer.hpp"
 #include "TemperatureCheck.hpp"
-#include "OutputPinSpy.hpp"
 #include "WiringPiPin.hpp"
 #include "LibCurlPostClient.h"
 #include "Cabinet.h"
@@ -89,17 +88,16 @@ int main()
     {
         return rawValue;
     });
-    OutputPinSpy pin;
+    WiringPiPin pin{26};
+    pin.ConfigureAsOutput();
     TemperatureCheck temperatureCheck(&pin);
     temperatureCheck.setTemperatureGetCallback(std::bind(&Thermometer::getTemperature, &thermometer));
     std::chrono::system_clock::time_point now = currentTime();
-
+    const int wait30seconds = 30000;
 
 
     while(true)
     {
-
-        //we will call temp service every 30 secs using the now chrono
 
         keypad.Service();
         lock.Service();
@@ -107,7 +105,7 @@ int main()
         doorSwitch.Service();
 
 
-        if ((currentTime() - now) >= std::chrono::milliseconds(300))
+        if ((currentTime() - now) >= std::chrono::milliseconds(wait30seconds))
         {
             now = currentTime();
             temperatureCheck.service();

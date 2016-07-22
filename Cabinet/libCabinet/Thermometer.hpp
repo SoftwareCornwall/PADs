@@ -8,7 +8,6 @@ class Thermometer
 {
     public:
         Thermometer(std::function<int()> callback);
-        void Service();//not sure yet
         int getTemperature();
     protected:
     private:
