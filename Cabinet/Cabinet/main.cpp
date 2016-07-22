@@ -25,8 +25,8 @@ int main()
 {
     wiringPiSetup();
 
-    std::string boxID = "1111R";
-    std::string URL = "http://192.168.0.110/events/";
+    std::string boxID = "AA123";
+    std::string URL = "http://192.168.0.108/api/";
 
     LibCurlPostClient client = LibCurlPostClient();
     Postman pat(URL, &client);

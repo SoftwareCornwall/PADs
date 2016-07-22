@@ -21,7 +21,7 @@ class CabinetTests : public Test
 {
 public:
 
-    std::string boxID = "114";
+    std::string boxID = "AA123";
     std::string URL = "http://gibberish.invalid/";
     HTTPPostClientSpy client;
     Postman postie;
@@ -43,7 +43,7 @@ TEST_F(CabinetTests, Cabinet_sends_event_after_door_open_event)
     client.sendPostMsgResult = true;
 
     cabinet.DoorEventCallback(true);
-    ASSERT_TRUE(IsSubstringPresentInOutputString("  \"door_status\" : \"Open\", \n", client.lastPOSTData));
+    ASSERT_TRUE(IsSubstringPresentInOutputString("  \"door_open\" : \"1\", \n", client.lastPOSTData));
     ASSERT_EQ(URL, client.lastPOSTURL);
 
 }
@@ -87,25 +87,25 @@ TEST_F(CabinetTests, Cabinet_status_message_reflects_changes_in_switch_status)
     cabinet.DoorEventCallback(true);
     fakeTime += minutes(16); // 16 mins
     cabinet.StatusService();
-    ASSERT_TRUE(IsSubstringPresentInOutputString("  \"door_status\" : \"Open\", \n", client.lastPOSTData));
+    ASSERT_TRUE(IsSubstringPresentInOutputString("  \"door_open\" : \"1\", \n", client.lastPOSTData));
 
     client.lastPOSTData = "";
     cabinet.DoorEventCallback(false);
     fakeTime += minutes(16); // 16 mins
     cabinet.StatusService();
-    ASSERT_TRUE(IsSubstringPresentInOutputString("  \"door_status\" : \"Closed\", \n", client.lastPOSTData));
+    ASSERT_TRUE(IsSubstringPresentInOutputString("  \"door_open\" : \"0\", \n", client.lastPOSTData));
 
     client.lastPOSTData = "";
     cabinet.HangerEventCallback(true);
     fakeTime += minutes(16); // 16 mins
     cabinet.StatusService();
-    ASSERT_TRUE(IsSubstringPresentInOutputString("  \"hanger_status\" : \"Down\" \n", client.lastPOSTData));
+    ASSERT_TRUE(IsSubstringPresentInOutputString("  \"defib_removed\" : \"0\", \n", client.lastPOSTData));
 
     client.lastPOSTData = "";
     cabinet.HangerEventCallback(false);
     fakeTime += minutes(16); // 16 mins
     cabinet.StatusService();
-    ASSERT_TRUE(IsSubstringPresentInOutputString("  \"hanger_status\" : \"Up\" \n", client.lastPOSTData));
+    ASSERT_TRUE(IsSubstringPresentInOutputString("  \"defib_removed\" : \"1\", \n", client.lastPOSTData));
 
 }
 
