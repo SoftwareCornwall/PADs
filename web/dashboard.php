@@ -86,7 +86,7 @@
 	$tplArray = array();
 	while ( $row = mysqli_fetch_array ( $result ) )
 	{
-		$door_open = (boolval($row['door_open']) ? 'Open' : 'False');
+		$door_open = (boolval($row['door_open']) ? 'Open' : 'Closed');
 
 		if ($row ['defib_removed'] == 1)	{
 			$defib_status = "Unavailable";
