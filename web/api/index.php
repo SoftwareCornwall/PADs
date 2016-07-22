@@ -25,9 +25,9 @@
     $temp_status = mysqli_real_escape_string($conn, $data['temp_status']);
 
     echo "<p>Cabinet ID: ".$cabinet_id;
-    echo "<br>Door Status: ".(boolval($door_open) ? 'True' : 'False');
-    echo "<br>Hanger Status: ".(boolval($defib_removed) ? 'True' : 'False');
-    echo "<br>Alarm Status: ".(boolval($alarm_status) ? 'True' : 'False');
+    echo "<br>Door Open: ".(boolval($door_open) ? 'True' : 'False');
+    echo "<br>Defib Removed: ".(boolval($defib_removed) ? 'True' : 'False');
+    echo "<br>Defib Fault: ".(boolval($alarm_status) ? 'True' : 'False');
     echo "<br>Temp Status: ".$temp_status."°C</p>";
 
     // Declare and set the old status variables
