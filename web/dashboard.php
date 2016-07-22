@@ -75,6 +75,10 @@
 				FROM tbl_status stats
 				WHERE stats.cabinet_id = cabs.id ORDER BY stats.last_update DESC LIMIT 1) , 'Not available') alarm_status,
 		COALESCE(
+			(SELECT stats.temp_status
+				FROM tbl_status stats
+				WHERE stats.cabinet_id = cabs.id ORDER BY stats.last_update DESC LIMIT 1) , 'Not available') temp_status,
+		COALESCE(
 	   	(SELECT stats.last_update
 	    	FROM tbl_status stats
 	    	WHERE stats.cabinet_id = cabs.id ORDER BY stats.last_update DESC LIMIT 1) , 'Not available') last_update
@@ -87,6 +91,8 @@
 	while ( $row = mysqli_fetch_array ( $result ) )
 	{
 		$door_open = (boolval($row['door_open']) ? 'Open' : 'Closed');
+
+		$temp_status = ($row['temp_status']."°C");
 
 		if ($row ['defib_removed'] == 1)	{
 			$defib_status = "Unavailable";
@@ -103,7 +109,8 @@
 			'door_status'=>$door_open,
 			'defib_status'=>$defib_status,
 			'last_update'=>$row['last_update'],
-			'cut_off_time'=>$row['cut_off_time']
+			'cut_off_time'=>$row['cut_off_time'],
+			'temp_status'=>$temp_status
 	 	);
 	}
 
