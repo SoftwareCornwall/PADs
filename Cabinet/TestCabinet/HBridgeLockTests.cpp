@@ -2,22 +2,12 @@
 #include <gtest/gtest.h>
 
 #include "TestTime.hpp"
+#include "OutputPinSpy.hpp"
 
 using namespace ::testing;
 using namespace ::std::chrono;
 
-class OutputPinSpy : public OutputPin
-{
-public:
-    bool state{false};
-    bool stateSet{false};
 
-    void State(bool state) override
-    {
-        this->state = state;
-        stateSet = true;
-    }
-};
 
 class HBridgeLockTests : public Test
 {

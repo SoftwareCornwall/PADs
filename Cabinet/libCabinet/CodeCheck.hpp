@@ -21,7 +21,6 @@ class CodeCheck
         std::map<int,char> inputConversion;
         std::function<void()> unlockCallback;
 
-
 };
 
 #endif

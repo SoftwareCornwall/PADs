@@ -55,10 +55,15 @@
 		<Unit filename="MatrixKeypadReader.cpp" />
 		<Unit filename="MatrixKeypadReader.hpp" />
 		<Unit filename="OutputPin.hpp" />
+		<Unit filename="OutputPinSpy.hpp" />
 		<Unit filename="Postman.cpp" />
 		<Unit filename="Postman.h" />
 		<Unit filename="Switch.cpp" />
 		<Unit filename="Switch.hpp" />
+		<Unit filename="TemperatureCheck.cpp" />
+		<Unit filename="TemperatureCheck.hpp" />
+		<Unit filename="Thermometer.cpp" />
+		<Unit filename="Thermometer.hpp" />
 		<Unit filename="WiringPiPin.cpp" />
 		<Unit filename="WiringPiPin.hpp" />
 		<Extensions>

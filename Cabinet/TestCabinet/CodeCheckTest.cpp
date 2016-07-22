@@ -32,7 +32,7 @@ TEST(CodeCheckTests, test_if_key_input_is_valid_1234e)
     checker.keyPressed(8);
     checker.keyPressed(10);
     checker.keyPressed(2);
-    EXPECT_EQ("1234", checker.getCodeEntered());
+    EXPECT_EQ("", checker.getCodeEntered());
 }
 
 TEST(CodeCheckTests, test_if_key_input_is_valid_12e)//e should reset code if code incorrect
