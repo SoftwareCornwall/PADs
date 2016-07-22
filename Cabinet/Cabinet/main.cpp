@@ -13,6 +13,7 @@
 #include "Cabinet.h"
 #include <thread>
 #include <chrono>
+#include "MCP3304.hpp"
 
 #define SERVICE_SLEEP_TIME_MILLISECONDS 1
 
@@ -82,19 +83,20 @@ int main()
     keypad.SetKeyPressedCallback(std::bind(&CodeCheck::keyPressed, &codeChecker, _1));
     codeChecker.SetUnlockCallback(std::bind(&HBridgeLock::Unlock, &lock));
 
+       /****A2D****/
+
+    WiringPiPin a2dChipSelect{21};
+    a2dChipSelect.ConfigureAsOutput();
+    MCP3304 a2d{0, 500000, &a2dChipSelect};
+
     /**** Thermometer ****/
-    int rawValue = 32031;
-    Thermometer thermometer([&rawValue]()
-    {
-        return rawValue;
-    });
+    Thermometer thermometer(std::bind(&MCP3304::Read, &a2d));
     WiringPiPin pin{26};
     pin.ConfigureAsOutput();
     TemperatureCheck temperatureCheck(&pin);
     temperatureCheck.setTemperatureGetCallback(std::bind(&Thermometer::getTemperature, &thermometer));
     std::chrono::system_clock::time_point now = currentTime();
     const int wait30seconds = 30000;
-
 
     while(true)
     {
