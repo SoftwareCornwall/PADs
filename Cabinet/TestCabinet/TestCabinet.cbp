@@ -49,6 +49,8 @@
 		<Unit filename="HBridgeLockTests.cpp" />
 		<Unit filename="HTTPPostClientSpy.cpp" />
 		<Unit filename="HTTPPostClientSpy.h" />
+		<Unit filename="HangerTest.cpp" />
+		<Unit filename="HangerTest.hpp" />
 		<Unit filename="MatixKeypadTests.cpp" />
 		<Unit filename="MatrixKeypadPinsFake.cpp" />
 		<Unit filename="MatrixKeypadPinsFake.hpp" />
@@ -57,6 +59,8 @@
 		<Unit filename="POSTTests.cpp" />
 		<Unit filename="SwitchTests.cpp" />
 		<Unit filename="TemperatureCheckTests.cpp" />
+		<Unit filename="TestFunctions.cpp" />
+		<Unit filename="TestFunctions.hpp" />
 		<Unit filename="TestPin.hpp" />
 		<Unit filename="TestTime.cpp" />
 		<Unit filename="TestTime.hpp" />

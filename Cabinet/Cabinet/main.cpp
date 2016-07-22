@@ -26,8 +26,8 @@ chrono::high_resolution_clock::time_point currentTime()
 int main()
 {
     wiringPiSetup();
-    std::string boxID = "1111R";
-    std::string URL = "http://192.168.0.110/events/";
+    std::string boxID = "AA123";
+    std::string URL = "http://192.168.0.108/api/";
 
     LibCurlPostClient client = LibCurlPostClient();
     Postman pat(URL, &client);
@@ -39,6 +39,14 @@ int main()
 
     WiringPiPin doorPin{2};
     Switch doorSwitch{&doorPin, doorEventCallback};
+
+    /**** hanger switch ****/
+
+    auto hangerEventCallback = std::bind(&Cabinet::HangerEventCallback, &cabinet, _1);
+
+    WiringPiPin hangerPin{3};
+    Switch hangerSwitch{&hangerPin, hangerEventCallback};
+
 
     /**** H-Bridge Lock ****/
     WiringPiPin lockOpen{0};
@@ -105,7 +113,9 @@ int main()
         lock.Service();
 
         doorSwitch.Service();
+        hangerSwitch.Service();
 
+        cabinet.StatusService();
 
         if ((currentTime() - now) >= std::chrono::milliseconds(wait30seconds))
         {
