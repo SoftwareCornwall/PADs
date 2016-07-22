@@ -24,7 +24,7 @@ int main()
     AlsaMicrophoneInput mic;
     int channels = 1;
     int sampleRate = 44100;
-    int beepFrequency = 440;
+    int beepFrequency = 1744;
     int seconds = 15;
     alsaErrorCode = mic.SetupAudioDevice("hw:1", 4096, sampleRate, channels, periodSize);
 
