@@ -2,7 +2,7 @@
   /* This sends a message and array of phone numbers to the send_sms function.
    * The message body of the SMS can be changed on line 32. */
 
-  if ($old_hanger_status == 1 && $hanger_status == 0) {
+  if ($old_defib_removed == 0 && $defib_removed == 1) {
     // Include the sms file
     //require_once 'send_sms.php';
 

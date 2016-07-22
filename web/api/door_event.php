@@ -2,7 +2,7 @@
   /* This sends a message and array of phone numbers to the send_sms function.
    * The message body of the SMS can be changed on line 30. */
 
-  if ($old_door_status == 0 && $door_status == 1) {
+  if ($old_door_open == 0 && $door_open == 1) {
     // Include the sms file
     //require_once 'send_sms.php';
 
