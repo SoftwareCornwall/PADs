@@ -10,7 +10,7 @@
 	<img class="logo" src="http://fleet.org.uk/images/Fleet-Logo-150x150.jpg" alt="Fleet Logo"  />
 	<button type="button" onclick="javascript:window.location.href='../../templates/sample_form.html'">Create new record</button>
 	<button type="button" value="Refresh Page" onClick="window.location.reload()">Update</button>
-	
+
 	<h1>Fleet PADs</h1>
 	<p>{{cab.cut_off_time}}</p>
 	<table class="table">
@@ -21,12 +21,13 @@
 				<th>Postcode</th>
 				<th>Door Status</th>
 				<th>Defib Status</th>
+				<th>Temp Status</th>
 				<th>Last Update</th>
 			</tr>
 		</thead>
 
 		<tbody>
-	
+
 		{% for cab in cabinets %}
 
 		{% if cab.last_update < cab.cut_off_time %}<!-- change back to < / -->
@@ -36,6 +37,7 @@
 				<td>{{cab.postcode}}</td>
 				<td>{{cab.door_status}}</td>
 				<td>{{cab.defib_status}}</td>
+				<td>{{cab.temp_status}}</td>
 				<td>{{cab.last_update}}</td>
 			</tr>
 
@@ -46,6 +48,7 @@
 				<td>{{cab.postcode}}</td>
 				<td>{{cab.door_status}}</td>
 				<td>{{cab.defib_status}}</td>
+				<td>{{cab.temp_status}}</td>
 				<td>{{cab.last_update}}</td>
 			</tr>
 
@@ -56,6 +59,7 @@
 				<td>{{cab.postcode}}</td>
 				<td>{{cab.door_status}}</td>
 				<td>{{cab.defib_status}}</td>
+				<td>{{cab.temp_status}}</td>
 				<td>{{cab.last_update}}</td>
 			</tr>
 
@@ -66,6 +70,7 @@
 				<td>{{cab.postcode}}</td>
 				<td>{{cab.door_status}}</td>
 				<td>{{cab.defib_status}}</td>
+				<td>{{cab.temp_status}}</td>
 				<td>{{cab.last_update}}</td>
 			</tr>
 
@@ -78,7 +83,3 @@
 
 </body>
 </html>
-
-
-
-

@@ -1,9 +1,9 @@
-<?php 
+<?php
 
 	use \Psr\Http\Message\ServerRequestInterface as Request;	//shortens path to 'request'
 	use \Psr\Http\Message\ResponseInterface as Response;	//^^to 'Response'
 	require 'vendor/autoload.php';
-	$app = new \Slim\App(); 
+	$app = new \Slim\App();
 
 	$app->post('/event', function ($request, $response, $args) {
 		$data = $request->getParsedBody(); 	//creates array from data posted by user
@@ -60,37 +60,58 @@
 
 	$conn= mysqli_connect("localhost", "root", "password", "pads_db", "3306")//creates connection!>
 				or die ("Sorry -  could not connect to MySQL");
-	
+
 	$query = "SELECT cabs.id, cabs.location, cabs.postcode, SUBTIME(CURRENT_TIMESTAMP(),'1:02:00') cut_off_time,
 		COALESCE(
-	   	(SELECT stats.door_status 
-	    	FROM tbl_status stats 
-	    	WHERE stats.cabinet_id = cabs.id ORDER BY stats.last_update DESC LIMIT 1) , 'Not available') door_status, 
+	   	(SELECT stats.door_open
+	    	FROM tbl_status stats
+	    	WHERE stats.cabinet_id = cabs.id ORDER BY stats.last_update DESC LIMIT 1) , 'Not available') door_open,
 		COALESCE(
-	   	(SELECT stats.defib_status 
-	    	FROM tbl_status stats 
-	    	WHERE stats.cabinet_id = cabs.id ORDER BY stats.last_update DESC LIMIT 1) , 'Not available') defib_status,
+	   	(SELECT stats.defib_removed
+	    	FROM tbl_status stats
+	    	WHERE stats.cabinet_id = cabs.id ORDER BY stats.last_update DESC LIMIT 1) , 'Not available') defib_removed,
 		COALESCE(
-	   	(SELECT stats.last_update 
-	    	FROM tbl_status stats 
+			(SELECT stats.alarm_status
+				FROM tbl_status stats
+				WHERE stats.cabinet_id = cabs.id ORDER BY stats.last_update DESC LIMIT 1) , 'Not available') alarm_status,
+		COALESCE(
+			(SELECT stats.temp_status
+				FROM tbl_status stats
+				WHERE stats.cabinet_id = cabs.id ORDER BY stats.last_update DESC LIMIT 1) , 'Not available') temp_status,
+		COALESCE(
+	   	(SELECT stats.last_update
+	    	FROM tbl_status stats
 	    	WHERE stats.cabinet_id = cabs.id ORDER BY stats.last_update DESC LIMIT 1) , 'Not available') last_update
-		FROM tbl_cabinets cabs 
+		FROM tbl_cabinets cabs
 		ORDER BY cabs.id ASC";
 
 	$result = mysqli_query($conn, $query); //takes everything from tbl_cabinet, assigns to value $query!>
 
-	$tplArray = array(); 
+	$tplArray = array();
 	while ( $row = mysqli_fetch_array ( $result ) )
 	{
-		    $tplArray[] = array (
-		 'id' => $row ['id'],
-		 'location' => $row ['location'], 
-		'postcode'=>$row['postcode'],//gets fields from 'select *' to pass to html to display + gives data names
-		'door_status'=>$row['door_status'],
-		'defib_status'=>$row['defib_status'],
-		'last_update'=>$row['last_update'],
-		'cut_off_time'=>$row['cut_off_time']
-	 );
+		$door_open = (boolval($row['door_open']) ? 'Open' : 'Closed');
+
+		$temp_status = ($row['temp_status']."°C");
+
+		if ($row ['defib_removed'] == 1)	{
+			$defib_status = "Unavailable";
+		} elseif ($row ['alarm_status'] == 1) {
+			$defib_status = "Fault";
+		} else {
+			$defib_status = "Available";
+		}
+		// ------------------------------------------------------------------------
+		$tplArray[] = array (
+			'id' => $row ['id'],
+			'location' => $row ['location'],
+			'postcode'=>$row['postcode'],//gets fields from 'select *' to pass to html to display + gives data names
+			'door_status'=>$door_open,
+			'defib_status'=>$defib_status,
+			'last_update'=>$row['last_update'],
+			'cut_off_time'=>$row['cut_off_time'],
+			'temp_status'=>$temp_status
+	 	);
 	}
 
     return $this->view->render($response, 'sample.html', //calls sample.html
@@ -98,4 +119,3 @@
 });
 
 $app->run();
-?>
