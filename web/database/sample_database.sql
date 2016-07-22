@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 22, 2016 at 10:51 AM
+-- Generation Time: Jul 22, 2016 at 12:57 PM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.6.23
 
@@ -19,28 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `pads_db`
 --
-
-DELIMITER $$
---
--- Procedures
---
-CREATE DEFINER=`root`@`localhost` PROCEDURE `GetAllCabinetRecords` ()  BEGIN
-SELECT * FROM tbl_cabinets;
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `GetCabinetRecord` (IN `cabID` VARCHAR(200))  BEGIN
-SELECT * FROM tbl_cabinets WHERE id = cabID;
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateCabinetDetails` (IN `cabID` VARCHAR(200), IN `NewLocation` VARCHAR(30), IN `NewPostcode` VARCHAR(30))  NO SQL
-BEGIN 
-UPDATE tbl_cabinets 
-SET tbl_cabinets.location = NewLocation, 
-tbl_cabinets.postcode = NewPostcode 
-WHERE tbl_cabinets.id = cabID; 
-END$$
-
-DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -81,7 +59,7 @@ CREATE TABLE `tbl_fleet` (
 --
 
 INSERT INTO `tbl_fleet` (`id`, `first_name`, `last_name`, `phone_number`) VALUES
-(1, 'Tyler', 'Arnold', '+447597997201');
+(1, 'Jon', 'Cole', '+447477681144');
 
 -- --------------------------------------------------------
 
@@ -102,7 +80,7 @@ CREATE TABLE `tbl_guardians` (
 --
 
 INSERT INTO `tbl_guardians` (`id`, `cabinet_id`, `first_name`, `last_name`, `phone_number`) VALUES
-(1, 'AA123', 'Jon', 'Cole', '+447477681144');
+(1, 'AA123', 'Tyler', 'Arnold', '+447597997201');
 
 -- --------------------------------------------------------
 
@@ -129,7 +107,20 @@ INSERT INTO `tbl_status` (`id`, `cabinet_id`, `door_open`, `defib_removed`, `ala
 (2, 'AB123', 0, 0, 0, 14, '2016-07-22 08:46:57'),
 (3, 'BB123', 0, 0, 0, 16, '2016-07-22 08:47:44'),
 (4, 'AB123', 1, 0, 0, 16, '2016-07-22 08:48:00'),
-(5, 'AB123', 1, 1, 0, 16, '2016-07-22 08:48:08');
+(5, 'AB123', 1, 1, 0, 16, '2016-07-22 08:48:08'),
+(6, 'AA123', 1, 0, 0, 15, '2016-07-22 09:29:16'),
+(7, 'AA123', 0, 0, 0, 12, '2016-07-22 10:08:26'),
+(8, 'AA123', 1, 1, 0, 15, '2016-07-22 10:11:03'),
+(9, 'AA123', 1, 0, 0, 15, '2016-07-22 10:11:17'),
+(10, 'AA123', 1, 1, 0, 15, '2016-07-22 10:11:45'),
+(11, 'AA123', 1, 0, 0, 15, '2016-07-22 10:13:20'),
+(12, 'AA123', 1, 0, 0, 15, '2016-07-22 10:13:50'),
+(13, 'AA123', 0, 0, 0, 12, '2016-07-22 10:15:30'),
+(14, 'AA123', 1, 0, 0, 15, '2016-07-22 10:15:58'),
+(15, 'AA123', 1, 0, 0, 15, '2016-07-22 10:16:28'),
+(16, 'AA123', 1, 1, 0, 15, '2016-07-22 10:22:02'),
+(17, 'AA123', 0, 0, 0, 12, '2016-07-22 10:27:58'),
+(18, 'AA123', 0, 0, 0, 12, '2016-07-22 10:32:57');
 
 --
 -- Indexes for dumped tables
@@ -179,7 +170,7 @@ ALTER TABLE `tbl_guardians`
 -- AUTO_INCREMENT for table `tbl_status`
 --
 ALTER TABLE `tbl_status`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- Constraints for dumped tables
 --
