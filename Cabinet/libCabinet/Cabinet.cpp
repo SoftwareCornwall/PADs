@@ -21,14 +21,6 @@ bool Cabinet::DoorEventCallback(bool doorOpen)
 {
     doorIsOpen = doorOpen;
 
-   /* if(doorOpen)
-    {
-        return postie->sendEventNotification(boxID, "Open", "Down");
-    }
-    return false;
-
-    */
-
     return postie->sendEventNotification(boxID, doorIsOpen, hangerIsDown);
 
 }
@@ -36,17 +28,6 @@ bool Cabinet::DoorEventCallback(bool doorOpen)
 bool Cabinet::HangerEventCallback(bool hangerDown)
 {
     hangerIsDown = hangerDown;
-
-    /* if(hangerDown)
-    {
-        return postie->sendEventNotification(boxID, "Open", "Down");
-    }
-    else
-    {
-        return postie->sendEventNotification(boxID, "Open", "Up");
-    }
-    return false;
-    */
 
     return postie->sendEventNotification(boxID, doorIsOpen, hangerIsDown);
 
