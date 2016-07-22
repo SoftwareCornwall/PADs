@@ -6,8 +6,9 @@
    * alarm_status (0 = Working / 1 = Fault)
    * temp_status (int value of current temperature)*/
 
-  // Connect to the database
+  // Add dbconnect and Twilio
   include_once ('../database/db_connect.php');
+  require 'send_sms.php';
 
   // JSON Post Method
   $data = file_get_contents("php://input");
@@ -55,6 +56,7 @@
     include 'door_event.php';
     include 'alarm_event.php';
     include 'hanger_event.php';
+    
   } elseif (!empty($data['cabinet_id'])) {
       echo "<p>Missing some JSON post data. The status update could not be completed.</p>";
   } else {

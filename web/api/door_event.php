@@ -2,9 +2,9 @@
   /* This sends a message and array of phone numbers to the send_sms function.
    * The message body of the SMS can be changed on line 30. */
 
-  if ($old_door_status == "0" && $door_status == "1") {
+  if ($old_door_status == 0 && $door_status == 1) {
     // Include the sms file
-    require_once 'send_sms.php';
+    //require_once 'send_sms.php';
 
     // Get the phone number array for guardians
     $phone_numbers = array();

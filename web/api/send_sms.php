@@ -1,5 +1,5 @@
 <?php
-require_once '../vendor/twilio-php-master/Services/Twilio.php';
+require '../vendor/twilio-php-master/Services/Twilio.php';
 
 function send_sms($body, $phone_numbers)
 {
@@ -15,11 +15,9 @@ function send_sms($body, $phone_numbers)
     $message = $client->account->messages->create(array(
       "From" => "+441671642020", // From a valid Twilio number
       "To" => $send_number,   // Text this number
-      "Body" => $body,
+      "Body" => $body, // Send this message
     ));
   }
-
-  echo $body;
 
   // Display a confirmation message on the screen
   echo "Sent message {$message->sid}";
