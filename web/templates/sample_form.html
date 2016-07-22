@@ -1,17 +1,59 @@
+<head>
 
-<form action="action.php" method="post">
+<title>Create New Defibrillator </title>
+	<style>
 
- <p>PAD LOCATION<input type="text" name="pad_l" /></p>
+		.button{
+		}
+		body{
+			background-color:white;
+			font-size:20px;
+		}
 
- <p>PAD ID<input type="text" name="pad_id" /></p>
-<button type="button">link button 1</button>
-<style>
-.button{
-	background-color: pink
-}
+		h1{
+			font-size:30px;
+		}
 
-</style>
- <p><input type="submit" /></p>
+		.logo{
+			float:right;
+			width:200px;
+			height:200px;
+		}
+		.form_{
+			position: relative;
+    			left: 30px;
+			float:center;
+		}
 
+
+	</style>
+
+</head>
+
+	<form action="action.php" method="post">
+
+	<body>
+
+		<img class="logo" src="http://fleet.org.uk/images/Fleet-Logo-150x150.jpg" alt="Fleet Logo" />
+
+		<h1> Add New Defibrillator</h1>
+
+		<br>
+
+		 <p>ID  <input type="text" class=form_ name="pad_id" /></p>
+
+		 <p>Location  <input type="text" class=form_ name="pad_l" /></p>
+
+		<p>Postcode  <input type="text"class=form_ name="pad_post" /></p>
+
+		<!-- <p>Door Status  <input type="text" class=form_ name="pad_door"/></p>
+
+		<p>Defib Status  <input type="text" class=form_ name="pad_defib"  /></p> -->
+
+		<br>
+		<p><input type="submit" /></p>
+		<br>
+		<button class="button" type="button" onclick="javascript:window.location.href='../../event/abc'">Return to dashboard</button>
+
+	</body>
 </form>
-

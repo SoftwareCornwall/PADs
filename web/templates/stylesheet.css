@@ -1,0 +1,42 @@
+	h1{
+		font-size: 60px;
+	}
+	
+	
+	body {
+			font-family: "Arial Black", cursive ,sans-serif;
+	}	
+	
+	.logo {
+		display: block; 
+		width: 150px;
+		height: 150px;
+		float: right;	
+	}
+	.table {
+		width: 100%;
+		color: black;
+		background-color: white;
+		margin: 0 auto;
+		padding: 10px;
+	}
+	td{
+	padding:5px;
+	
+	}
+	thead {
+		color: white;	
+		background-color: darkblue;
+	}
+	.status_unavailable {
+		background-color: red;
+	}
+	.status_warning {
+		background-color: orange;
+	}
+	.door_error {
+		background-color: red;
+	}
+	.door_warning {
+		background-color: orange;
+	}

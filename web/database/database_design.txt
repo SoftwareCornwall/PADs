@@ -1,15 +1,17 @@
 Database Name: pads_db
 
 tbl_cabinets:
-  (PK) id - AUTO_INCREMENT INT
-  location - STRING *
+  (PK) id - STRING
+  location - STRING
   postcode - STRING
 
 tbl_status:
   (PK) id - AUTO_INCREMENT INT
   (FK) cabinet_id - STRING
-  door_status - STRING ("Open" / "Closed")
-  defib_status - STRING ("Available" / "Not Working" / "Removed")
+  door_open - TINYINT (0 = Closed / 1 = Open)
+  defib_removed - TINYINT (0 = Hanger Down / 1 = Hanger Up)
+  alarm_status - TINYINT (0 = Working / 1 = Fault)
+  temp_status - INT (Current sensor value)
   last_update - CURRENT TIMESTAMP
 
 tbl_guardians:
@@ -17,7 +19,10 @@ tbl_guardians:
   first_name - STRING
   last_name - STRING
   phone_number - STRING
-  (FK) cabinet_id - INT
+  (FK) cabinet_id - STRING
 
-* Need to ask on Monday/Tuesday about what location data will need to be
-  stored in our database
+  tbl_fleet:
+    (PK) id - AUTO_INCREMENT INT
+    first_name - STRING
+    last_name - STRING
+    phone_number - STRING

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<title> Defib Status' </title>
+
+</head>
+
+	<body>
+		<button type="button" onclick="javascript:window.location.href='../../templates/sample_form.html'">Create new record</button>
+		<button type="button" onclick="window.location.reload(true);">Update</button>
+		<style>
+
+			table {
+				width: 80%;
+				color:red;
+				background-color:red;
+				margin: 1px auto;
+				border: 10px solid black
+				padding: 10px
+			}
+
+			thead {
+				background-color:pink;
+			}
+
+		</style>
+
+		<h1>Fleet PADs</h1>
+		<table>
+			<thead><tr><td>Cabinet ID</td><td>Door Status</td><td>Defib Status</td><td>Last Update</td></tr></thead>
+			<tbody>
+				{% for cab in cabinets %}
+				    <tr><td>{{ cab.cabinet_id }}</td><td>{{ cab.door_status }}</td><td>{{cab.defib_status}}</td><td>{{cab.last_update}}</td></tr>
+				{% else %}
+				    <tr><td colspan=2>No users have been found.</td></tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</body>
+</html>
